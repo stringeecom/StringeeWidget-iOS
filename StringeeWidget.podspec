@@ -15,10 +15,10 @@ The Stringee platform, developed by Stringee, makes it easy to embed high-qualit
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'StringeeWidget/Classes/StringeeWidget.framework/Headers/*.h'
-  s.public_header_files = 'StringeeWidget/Classes/StringeeWidget.framework/Headers/*.h'
+  s.source_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
+  s.public_header_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
 
-  s.vendored_frameworks = 'StringeeWidget/Classes/StringeeWidget.framework'
+  s.vendored_frameworks = 'StringeeWidget/Classes/**/StringeeWidget.framework'
   s.dependency "Stringee", '1.8.0'
 
 end
