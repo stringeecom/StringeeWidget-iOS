@@ -1,0 +1,6 @@
+use_frameworks!
+target 'StringeeWidget_Tests' do
+  pod 'StringeeWidget', :path => '../'
+  
+  
+end
