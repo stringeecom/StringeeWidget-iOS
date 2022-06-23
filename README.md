@@ -10,6 +10,8 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+iOS 10 or any higher version.
+Xcode 13 or any higher version
 
 ## Installation
 
@@ -22,7 +24,7 @@ pod 'StringeeWidget'
 
 ## Author
 
-info@stringee.com, info@stringee.com
+info@stringee.com
 
 ## License
 
