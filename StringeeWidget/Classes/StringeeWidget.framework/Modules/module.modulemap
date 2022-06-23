@@ -1,0 +1,11 @@
+framework module StringeeWidget {
+  umbrella header "StringeeWidget.h"
+
+  export *
+  module * { export * }
+}
+
+module StringeeWidget.Swift {
+    header "StringeeWidget-Swift.h"
+    requires objc
+}
