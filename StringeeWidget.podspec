@@ -13,7 +13,7 @@ The Stringee platform, developed by Stringee, makes it easy to embed high-qualit
   s.author           = { 'Stringee' => 'info@stringee.com' }
   s.source           = { :git => 'https://github.com/stringeecom/StringeeWidget-iOS.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
   s.public_header_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
