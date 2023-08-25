@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
 // swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name StringeeWidget
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import CallKit
 import CoreGraphics
@@ -12,6 +13,7 @@ import Stringee
 import Swift
 import UIKit
 import _Concurrency
+import _StringProcessing
 extension EKAttributes {
   public struct LifecycleEvents {
     public typealias Event = () -> Swift.Void
@@ -45,7 +47,7 @@ public struct EKAttributes {
   public var exitAnimation: EKAttributes.Animation
   public var popBehavior: EKAttributes.PopBehavior {
     get
-    set(value)
+    set
   }
   public init()
 }
@@ -132,7 +134,7 @@ public struct JSON {
   }
   public var object: Any {
     get
-    set(newValue)
+    set
   }
   @available(*, unavailable, renamed: "null")
   public static var nullJSON: JSON {
@@ -186,13 +188,13 @@ extension Swift.String : JSONSubscriptType {
   }
 }
 extension JSON {
-  public subscript(path: [JSONSubscriptType]) -> JSON {
+  public subscript(path: [any JSONSubscriptType]) -> JSON {
     get
-    set(newValue)
+    set
   }
-  public subscript(path: JSONSubscriptType...) -> JSON {
+  public subscript(path: any JSONSubscriptType...) -> JSON {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON : Swift.ExpressibleByStringLiteral {
@@ -251,7 +253,7 @@ extension JSON {
   }
   public var arrayObject: [Any]? {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON {
@@ -263,148 +265,148 @@ extension JSON {
   }
   public var dictionaryObject: [Swift.String : Any]? {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON {
   public var bool: Swift.Bool? {
     get
-    set(newValue)
+    set
   }
   public var boolValue: Swift.Bool {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON {
   public var string: Swift.String? {
     get
-    set(newValue)
+    set
   }
   public var stringValue: Swift.String {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON {
   public var number: Foundation.NSNumber? {
     get
-    set(newValue)
+    set
   }
   public var numberValue: Foundation.NSNumber {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON {
   public var null: Foundation.NSNull? {
     get
-    set(newValue)
+    set
   }
   public func exists() -> Swift.Bool
 }
 extension JSON {
   public var url: Foundation.URL? {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON {
   public var double: Swift.Double? {
     get
-    set(newValue)
+    set
   }
   public var doubleValue: Swift.Double {
     get
-    set(newValue)
+    set
   }
   public var float: Swift.Float? {
     get
-    set(newValue)
+    set
   }
   public var floatValue: Swift.Float {
     get
-    set(newValue)
+    set
   }
   public var int: Swift.Int? {
     get
-    set(newValue)
+    set
   }
   public var intValue: Swift.Int {
     get
-    set(newValue)
+    set
   }
   public var uInt: Swift.UInt? {
     get
-    set(newValue)
+    set
   }
   public var uIntValue: Swift.UInt {
     get
-    set(newValue)
+    set
   }
   public var int8: Swift.Int8? {
     get
-    set(newValue)
+    set
   }
   public var int8Value: Swift.Int8 {
     get
-    set(newValue)
+    set
   }
   public var uInt8: Swift.UInt8? {
     get
-    set(newValue)
+    set
   }
   public var uInt8Value: Swift.UInt8 {
     get
-    set(newValue)
+    set
   }
   public var int16: Swift.Int16? {
     get
-    set(newValue)
+    set
   }
   public var int16Value: Swift.Int16 {
     get
-    set(newValue)
+    set
   }
   public var uInt16: Swift.UInt16? {
     get
-    set(newValue)
+    set
   }
   public var uInt16Value: Swift.UInt16 {
     get
-    set(newValue)
+    set
   }
   public var int32: Swift.Int32? {
     get
-    set(newValue)
+    set
   }
   public var int32Value: Swift.Int32 {
     get
-    set(newValue)
+    set
   }
   public var uInt32: Swift.UInt32? {
     get
-    set(newValue)
+    set
   }
   public var uInt32Value: Swift.UInt32 {
     get
-    set(newValue)
+    set
   }
   public var int64: Swift.Int64? {
     get
-    set(newValue)
+    set
   }
   public var int64Value: Swift.Int64 {
     get
-    set(newValue)
+    set
   }
   public var uInt64: Swift.UInt64? {
     get
-    set(newValue)
+    set
   }
   public var uInt64Value: Swift.UInt64 {
     get
-    set(newValue)
+    set
   }
 }
 extension JSON : Swift.Comparable {
@@ -426,8 +428,8 @@ public enum writingOptionsKeys {
   }
 }
 extension JSON : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 extension EKAttributes {
   public struct PositionConstraints {
@@ -439,9 +441,9 @@ extension EKAttributes {
       }
     }
     public enum Edge {
-      case ratio(value: CoreGraphics.CGFloat)
-      case offset(value: CoreGraphics.CGFloat)
-      case constant(value: CoreGraphics.CGFloat)
+      case ratio(value: CoreFoundation.CGFloat)
+      case offset(value: CoreFoundation.CGFloat)
+      case constant(value: CoreFoundation.CGFloat)
       case intrinsic
       public static var fill: EKAttributes.PositionConstraints.Edge {
         get
@@ -463,9 +465,9 @@ extension EKAttributes {
     }
     public enum KeyboardRelation {
       public struct Offset {
-        public var bottom: CoreGraphics.CGFloat
-        public var screenEdgeResistance: CoreGraphics.CGFloat?
-        public init(bottom: CoreGraphics.CGFloat = 0, screenEdgeResistance: CoreGraphics.CGFloat? = nil)
+        public var bottom: CoreFoundation.CGFloat
+        public var screenEdgeResistance: CoreFoundation.CGFloat?
+        public init(bottom: CoreFoundation.CGFloat = 0, screenEdgeResistance: CoreFoundation.CGFloat? = nil)
         public static var none: EKAttributes.PositionConstraints.KeyboardRelation.Offset {
           get
         }
@@ -494,7 +496,7 @@ extension EKAttributes {
     public var keyboardRelation: EKAttributes.PositionConstraints.KeyboardRelation
     public var size: EKAttributes.PositionConstraints.Size
     public var maxSize: EKAttributes.PositionConstraints.Size
-    public var verticalOffset: CoreGraphics.CGFloat
+    public var verticalOffset: CoreFoundation.CGFloat
     public var safeArea: EKAttributes.PositionConstraints.SafeArea
     public var hasVerticalOffset: Swift.Bool {
       get
@@ -508,7 +510,7 @@ extension EKAttributes {
     public static var fullScreen: EKAttributes.PositionConstraints {
       get
     }
-    public init(verticalOffset: CoreGraphics.CGFloat = 0, size: EKAttributes.PositionConstraints.Size = .sizeToWidth, maxSize: EKAttributes.PositionConstraints.Size = .intrinsic)
+    public init(verticalOffset: CoreFoundation.CGFloat = 0, size: EKAttributes.PositionConstraints.Size = .sizeToWidth, maxSize: EKAttributes.PositionConstraints.Size = .intrinsic)
   }
 }
 extension EKAttributes {
@@ -523,18 +525,18 @@ extension EKAttributes {
 extension EKAttributes {
   public struct Animation : Swift.Equatable {
     public struct Spring : Swift.Equatable {
-      public var damping: CoreGraphics.CGFloat
-      public var initialVelocity: CoreGraphics.CGFloat
-      public init(damping: CoreGraphics.CGFloat, initialVelocity: CoreGraphics.CGFloat)
+      public var damping: CoreFoundation.CGFloat
+      public var initialVelocity: CoreFoundation.CGFloat
+      public init(damping: CoreFoundation.CGFloat, initialVelocity: CoreFoundation.CGFloat)
       public static func == (a: EKAttributes.Animation.Spring, b: EKAttributes.Animation.Spring) -> Swift.Bool
     }
     public struct RangeAnimation : Swift.Equatable {
       public var duration: Foundation.TimeInterval
       public var delay: Foundation.TimeInterval
-      public var start: CoreGraphics.CGFloat
-      public var end: CoreGraphics.CGFloat
+      public var start: CoreFoundation.CGFloat
+      public var end: CoreFoundation.CGFloat
       public var spring: EKAttributes.Animation.Spring?
-      public init(from start: CoreGraphics.CGFloat, to end: CoreGraphics.CGFloat, duration: Foundation.TimeInterval, delay: Foundation.TimeInterval = 0, spring: EKAttributes.Animation.Spring? = nil)
+      public init(from start: CoreFoundation.CGFloat, to end: CoreFoundation.CGFloat, duration: Foundation.TimeInterval, delay: Foundation.TimeInterval = 0, spring: EKAttributes.Animation.Spring? = nil)
       public static func == (a: EKAttributes.Animation.RangeAnimation, b: EKAttributes.Animation.RangeAnimation) -> Swift.Bool
     }
     public struct Translate : Swift.Equatable {
@@ -608,8 +610,8 @@ extension EKAttributes {
   @objc func onSignalingState(state: Stringee.SignalingState)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class StringeeWidget : ObjectiveC.NSObject {
-  @objc public static var instance: StringeeWidget
-  @objc weak public var delegate: StringeeWidgetDelegate?
+  @objc public static let instance: StringeeWidget
+  @objc weak public var delegate: (any StringeeWidgetDelegate)?
   @objc public var autoShowPopup: Swift.Bool
   @objc weak public var viewToShowPopup: UIKit.UIView?
   @objc public var stringeeClient: Stringee.StringeeClient
@@ -619,7 +621,7 @@ extension EKAttributes {
   @objc public func makeCall(config: StringeeCallConfig, completion: @escaping (Swift.Bool, Swift.Int, Swift.String, Swift.String?) -> Swift.Void)
   @objc public func makeCall(token: Swift.String, config: StringeeCallConfig, completion: @escaping (Swift.Bool, Swift.Int, Swift.String, Swift.String?) -> Swift.Void)
   @objc public func finalized(completion: ((Swift.Bool, Swift.Int, Swift.String) -> Swift.Void)? = nil)
-  @objc public func voipRegistration(delegate: PushKit.PKPushRegistryDelegate? = nil)
+  @objc public func voipRegistration(delegate: (any PushKit.PKPushRegistryDelegate)? = nil)
   @objc public func didUpdate(pushCredentials: PushKit.PKPushCredentials, for type: PushKit.PKPushType)
   @objc public func didReceiveIncomingPushWith(payload: PushKit.PKPushPayload, for type: PushKit.PKPushType, completion: @escaping () -> Swift.Void)
   @objc deinit
@@ -637,25 +639,25 @@ extension StringeeWidget : PushKit.PKPushRegistryDelegate {
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RoundProgressView : UIKit.UIView, Progressive {
   @_Concurrency.MainActor(unsafe) public var isAnnular: Swift.Bool
-  @_Concurrency.MainActor(unsafe) public var progress: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var progressTintColor: UIKit.UIColor {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var backgroundTintColor: UIKit.UIColor {
     get
-    set(value)
+    set
   }
-  @objc dynamic public convenience init()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc convenience dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
-    @_Concurrency.MainActor(unsafe) @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
   @objc deinit
 }
 @objc @_Concurrency.MainActor(unsafe) final public class EKRatingMessageView : UIKit.UIView {
@@ -693,11 +695,11 @@ extension EKAttributes {
     case none
     case active(with: EKAttributes.Shadow.Value)
     public struct Value {
-      public let radius: CoreGraphics.CGFloat
+      public let radius: CoreFoundation.CGFloat
       public let opacity: Swift.Float
       public let color: EKColor
-      public let offset: CoreGraphics.CGSize
-      public init(color: EKColor = .black, opacity: Swift.Float, radius: CoreGraphics.CGFloat, offset: CoreGraphics.CGSize = .zero)
+      public let offset: CoreFoundation.CGSize
+      public init(color: EKColor = .black, opacity: Swift.Float, radius: CoreFoundation.CGFloat, offset: CoreFoundation.CGSize = .zero)
     }
   }
 }
@@ -732,26 +734,26 @@ extension EKAttributes {
     case enqueue(priority: EKAttributes.Precedence.Priority)
     public var priority: EKAttributes.Precedence.Priority {
       get
-      set(newValue)
+      set
     }
   }
 }
 extension EKAttributes.Precedence.Priority {
-  public static var maxRawValue: Swift.Int
-  public static var highRawValue: Swift.Int
-  public static var normalRawValue: Swift.Int
-  public static var lowRawValue: Swift.Int
-  public static var minRawValue: Swift.Int
-  public static var max: EKAttributes.Precedence.Priority
-  public static var high: EKAttributes.Precedence.Priority
-  public static var normal: EKAttributes.Precedence.Priority
-  public static var low: EKAttributes.Precedence.Priority
-  public static var min: EKAttributes.Precedence.Priority
+  public static let maxRawValue: Swift.Int
+  public static let highRawValue: Swift.Int
+  public static let normalRawValue: Swift.Int
+  public static let lowRawValue: Swift.Int
+  public static let minRawValue: Swift.Int
+  public static let max: EKAttributes.Precedence.Priority
+  public static let high: EKAttributes.Precedence.Priority
+  public static let normal: EKAttributes.Precedence.Priority
+  public static let low: EKAttributes.Precedence.Priority
+  public static let min: EKAttributes.Precedence.Priority
 }
 public typealias QLMultipleConstraints = [QLAttribute : UIKit.NSLayoutConstraint]
 extension UIKit.UILayoutPriority {
-  public static var must: QLPriority
-  public static var zero: QLPriority
+  public static let must: QLPriority
+  public static let zero: QLPriority
 }
 public struct QLAttributePair {
   public let first: QLAttribute
@@ -820,9 +822,9 @@ extension EKAttributes {
     }
     public struct Gradient {
       public var colors: [EKColor]
-      public var startPoint: CoreGraphics.CGPoint
-      public var endPoint: CoreGraphics.CGPoint
-      public init(colors: [EKColor], startPoint: CoreGraphics.CGPoint, endPoint: CoreGraphics.CGPoint)
+      public var startPoint: CoreFoundation.CGPoint
+      public var endPoint: CoreFoundation.CGPoint
+      public init(colors: [EKColor], startPoint: CoreFoundation.CGPoint, endPoint: CoreFoundation.CGPoint)
     }
     case visualEffect(style: EKAttributes.BackgroundStyle.BlurStyle)
     case color(color: EKColor)
@@ -836,9 +838,9 @@ extension EKAttributes {
   public enum Scroll {
     public struct PullbackAnimation {
       public var duration: Foundation.TimeInterval
-      public var damping: CoreGraphics.CGFloat
-      public var initialSpringVelocity: CoreGraphics.CGFloat
-      public init(duration: Foundation.TimeInterval, damping: CoreGraphics.CGFloat, initialSpringVelocity: CoreGraphics.CGFloat)
+      public var damping: CoreFoundation.CGFloat
+      public var initialSpringVelocity: CoreFoundation.CGFloat
+      public init(duration: Foundation.TimeInterval, damping: CoreFoundation.CGFloat, initialSpringVelocity: CoreFoundation.CGFloat)
       public static var jolt: EKAttributes.Scroll.PullbackAnimation {
         get
       }
@@ -854,32 +856,32 @@ extension EKAttributes {
 extension EKAttributes {
   public enum RoundCorners {
     case none
-    case all(radius: CoreGraphics.CGFloat)
-    case top(radius: CoreGraphics.CGFloat)
-    case bottom(radius: CoreGraphics.CGFloat)
+    case all(radius: CoreFoundation.CGFloat)
+    case top(radius: CoreFoundation.CGFloat)
+    case bottom(radius: CoreFoundation.CGFloat)
   }
   public enum Border {
     case none
-    case value(color: UIKit.UIColor, width: CoreGraphics.CGFloat)
+    case value(color: UIKit.UIColor, width: CoreFoundation.CGFloat)
   }
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RoundedButton : UIKit.UIButton {
   @_Concurrency.MainActor(unsafe) public var roundedCorners: RoundedCorners
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
-    @_Concurrency.MainActor(unsafe) @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func setTitleColor(_ color: UIKit.UIColor?, for state: UIKit.UIControl.State)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public var isHighlighted: Swift.Bool {
-    @_Concurrency.MainActor(unsafe) @objc get
-    @_Concurrency.MainActor(unsafe) @objc set(value)
+    @objc get
+    @objc set
   }
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class EKAccessoryNoteMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
@@ -897,79 +899,79 @@ public protocol HUDDelegate : AnyObject {
   func hudWasHidden(_ hud: HUD)
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class HUD : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) weak public var delegate: HUDDelegate?
+  @_Concurrency.MainActor(unsafe) weak public var delegate: (any HUDDelegate)?
   @_Concurrency.MainActor(unsafe) public var completionBlock: (() -> Swift.Void)?
   @_Concurrency.MainActor(unsafe) public var graceTime: Swift.Double
   @_Concurrency.MainActor(unsafe) public var minShowTime: Swift.Double
   @_Concurrency.MainActor(unsafe) public var removeFromSuperViewOnHide: Swift.Bool
   @_Concurrency.MainActor(unsafe) public var mode: HUDMode {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var contentColor: UIKit.UIColor {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var animationType: HUDAnimation
-  @_Concurrency.MainActor(unsafe) public var offset: CoreGraphics.CGPoint {
+  @_Concurrency.MainActor(unsafe) public var offset: CoreFoundation.CGPoint {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public static var maxOffset: CoreGraphics.CGFloat
-  @_Concurrency.MainActor(unsafe) public var margin: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public static let maxOffset: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var margin: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var topBottomMargin: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var topBottomMargin: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var minSize: CoreGraphics.CGSize {
+  @_Concurrency.MainActor(unsafe) public var minSize: CoreFoundation.CGSize {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var isSquare: Swift.Bool {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var isMotionEffectsEnabled: Swift.Bool {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var progress: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var progressObject: Foundation.Progress? {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var bezelView: BackgroundView {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var backgroundView: BackgroundView {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var customView: UIKit.UIView? {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var label: UIKit.UILabel {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var detailsLabel: UIKit.UILabel {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var button: RoundedButton {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public convenience init(with view: UIKit.UIView)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) convenience public init(with view: UIKit.UIView)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
@@ -1003,8 +1005,8 @@ public struct EKPopUpMessage {
   public typealias EKPopUpMessageAction = () -> ()
   public struct ThemeImage {
     public enum Position {
-      case topToTop(offset: CoreGraphics.CGFloat)
-      case centerToTop(offset: CoreGraphics.CGFloat)
+      case topToTop(offset: CoreFoundation.CGFloat)
+      case centerToTop(offset: CoreFoundation.CGFloat)
     }
     public var image: EKProperty.ImageContent
     public var position: EKPopUpMessage.ThemeImage.Position
@@ -1018,13 +1020,13 @@ public struct EKPopUpMessage {
   public init(themeImage: EKPopUpMessage.ThemeImage? = nil, title: EKProperty.LabelContent, description: EKProperty.LabelContent, button: EKProperty.ButtonContent, action: @escaping EKPopUpMessage.EKPopUpMessageAction)
 }
 @objc @_Concurrency.MainActor(unsafe) public class EKNoteMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var horizontalOffset: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var horizontalOffset: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var verticalOffset: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var verticalOffset: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -1054,7 +1056,7 @@ extension EKColor {
   public var inverted: EKColor {
     get
   }
-  public func with(alpha: CoreGraphics.CGFloat) -> EKColor
+  public func with(alpha: CoreFoundation.CGFloat) -> EKColor
   public static var white: EKColor {
     get
   }
@@ -1074,7 +1076,7 @@ extension EKColor {
 @objc @_Concurrency.MainActor(unsafe) public class EKProcessingNoteMessageView : EKAccessoryNoteMessageView {
   @_Concurrency.MainActor(unsafe) public var isProcessing: Swift.Bool {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent, activityIndicator: UIKit.UIActivityIndicatorView.Style)
@@ -1120,39 +1122,73 @@ extension EKAttributes {
   @objc public var customData: Swift.String?
   @objc public var isVideoCall: Swift.Bool
   @objc public var resolution: StringeeVideoResolution
+  @objc public var cameraMode: StringeeCameraFacing
+  public var scanViewConfig: StringeeScanViewConfig?
+  @objc public func setOvalConfig(_ config: OvalConfig)
+  @objc public func setRectangleConfig(_ config: RectangleConfig)
   @objc override dynamic public init()
   @objc deinit
+}
+public enum StringeeScanViewConfig {
+  case rectangle(RectangleConfig)
+  case oval(OvalConfig)
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class OvalConfig : ObjectiveC.NSObject {
+  @objc public var boderColor: UIKit.UIColor
+  @objc public var overlayColor: UIKit.UIColor
+  @objc public var widthRatio: CoreFoundation.CGFloat
+  @objc public var aspectRatio: CoreFoundation.CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class RectangleConfig : ObjectiveC.NSObject {
+  @objc public var widthRatio: CoreFoundation.CGFloat
+  @objc public var aspectRatio: CoreFoundation.CGFloat
+  @objc public var color: UIKit.UIColor
+  @objc public var radius: CoreFoundation.CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum StringeeCameraFacing : Swift.Int {
+  case front = 0
+  case back = 1
+  case both = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
 }
 extension UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public func forceContentWrap(_ axes: QLAxis...)
   @_Concurrency.MainActor(unsafe) public func forceContentWrap()
   @_Concurrency.MainActor(unsafe) public var verticalHuggingPriority: QLPriority {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var horizontalHuggingPriority: QLPriority {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var contentHuggingPriority: QLPriorityPair {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var verticalCompressionResistancePriority: QLPriority {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var horizontalCompressionResistancePriority: QLPriority {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var contentCompressionResistancePriority: QLPriorityPair {
     get
-    set(newValue)
+    set
   }
 }
 public protocol Progressive : AnyObject {
-  var progress: CoreGraphics.CGFloat { get set }
+  var progress: CoreFoundation.CGFloat { get set }
 }
 extension EKAttributes {
   public enum NotificationHapticFeedback {
@@ -1169,7 +1205,7 @@ extension EKAttributes {
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) final public class EKRatingSymbolsContainerView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) final public func setup(with message: EKRatingMessage, externalSelection: @escaping EKRatingMessage.Selection)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
@@ -1207,7 +1243,7 @@ public enum HUDBackgroundStyle {
   }
 }
 public enum RoundedCorners {
-  case radius(CoreGraphics.CGFloat)
+  case radius(CoreFoundation.CGFloat)
   case fully
 }
 extension EKAttributes {
@@ -1258,7 +1294,7 @@ public struct EKAlertMessage {
 public struct EKNotificationMessage {
   public struct Insets {
     public var contentInsets: UIKit.UIEdgeInsets
-    public var titleToDescription: CoreGraphics.CGFloat
+    public var titleToDescription: CoreFoundation.CGFloat
     public static var `default`: EKNotificationMessage.Insets
   }
   public let simpleMessage: EKSimpleMessage
@@ -1269,7 +1305,7 @@ public struct EKNotificationMessage {
 @objc @_Concurrency.MainActor(unsafe) final public class EKTextField : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) final public var text: Swift.String {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.TextFieldContent)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -1283,11 +1319,11 @@ public struct EKProperty {
     public var label: EKProperty.LabelContent
     public var backgroundColor: EKColor
     public var highlightedBackgroundColor: EKColor
-    public var contentEdgeInset: CoreGraphics.CGFloat
+    public var contentEdgeInset: CoreFoundation.CGFloat
     public var displayMode: EKAttributes.DisplayMode
     public var accessibilityIdentifier: Swift.String?
     public var action: EKProperty.ButtonContent.Action?
-    public init(label: EKProperty.LabelContent, backgroundColor: EKColor, highlightedBackgroundColor: EKColor, contentEdgeInset: CoreGraphics.CGFloat = 5, displayMode: EKAttributes.DisplayMode = .inferred, accessibilityIdentifier: Swift.String? = nil, action: @escaping EKProperty.ButtonContent.Action = {})
+    public init(label: EKProperty.LabelContent, backgroundColor: EKColor, highlightedBackgroundColor: EKColor, contentEdgeInset: CoreFoundation.CGFloat = 5, displayMode: EKAttributes.DisplayMode = .inferred, accessibilityIdentifier: Swift.String? = nil, action: @escaping EKProperty.ButtonContent.Action = {})
     public func backgroundColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
     public func highlightedBackgroundColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
     public func highlighedLabelColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
@@ -1309,28 +1345,28 @@ public struct EKProperty {
   }
   public struct ImageContent {
     public enum TransformAnimation {
-      case animate(duration: Foundation.TimeInterval, options: UIKit.UIView.AnimationOptions, transform: CoreGraphics.CGAffineTransform)
+      case animate(duration: Foundation.TimeInterval, options: UIKit.UIView.AnimationOptions, transform: CoreFoundation.CGAffineTransform)
       case none
     }
     public var tint: EKColor?
     public var images: [UIKit.UIImage]
     public var imageSequenceAnimationDuration: Foundation.TimeInterval
-    public var size: CoreGraphics.CGSize?
+    public var size: CoreFoundation.CGSize?
     public var contentMode: UIKit.UIView.ContentMode
     public var makesRound: Swift.Bool
     public var animation: EKProperty.ImageContent.TransformAnimation
     public var displayMode: EKAttributes.DisplayMode
     public var accessibilityIdentifier: Swift.String?
-    public init(imageName: Swift.String, animation: EKProperty.ImageContent.TransformAnimation = .none, displayMode: EKAttributes.DisplayMode = .inferred, size: CoreGraphics.CGSize? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, tint: EKColor? = nil, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
-    public init(image: UIKit.UIImage, animation: EKProperty.ImageContent.TransformAnimation = .none, displayMode: EKAttributes.DisplayMode = .inferred, size: CoreGraphics.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
-    public init(images: [UIKit.UIImage], imageSequenceAnimationDuration: Foundation.TimeInterval = 1, displayMode: EKAttributes.DisplayMode = .inferred, animation: EKProperty.ImageContent.TransformAnimation = .none, size: CoreGraphics.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
-    public init(imagesNames: [Swift.String], imageSequenceAnimationDuration: Foundation.TimeInterval = 1, displayMode: EKAttributes.DisplayMode = .inferred, animation: EKProperty.ImageContent.TransformAnimation = .none, size: CoreGraphics.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
-    public static func thumb(with image: UIKit.UIImage, edgeSize: CoreGraphics.CGFloat) -> EKProperty.ImageContent
-    public static func thumb(with imageName: Swift.String, edgeSize: CoreGraphics.CGFloat) -> EKProperty.ImageContent
+    public init(imageName: Swift.String, animation: EKProperty.ImageContent.TransformAnimation = .none, displayMode: EKAttributes.DisplayMode = .inferred, size: CoreFoundation.CGSize? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, tint: EKColor? = nil, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public init(image: UIKit.UIImage, animation: EKProperty.ImageContent.TransformAnimation = .none, displayMode: EKAttributes.DisplayMode = .inferred, size: CoreFoundation.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public init(images: [UIKit.UIImage], imageSequenceAnimationDuration: Foundation.TimeInterval = 1, displayMode: EKAttributes.DisplayMode = .inferred, animation: EKProperty.ImageContent.TransformAnimation = .none, size: CoreFoundation.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public init(imagesNames: [Swift.String], imageSequenceAnimationDuration: Foundation.TimeInterval = 1, displayMode: EKAttributes.DisplayMode = .inferred, animation: EKProperty.ImageContent.TransformAnimation = .none, size: CoreFoundation.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public static func thumb(with image: UIKit.UIImage, edgeSize: CoreFoundation.CGFloat) -> EKProperty.ImageContent
+    public static func thumb(with imageName: Swift.String, edgeSize: CoreFoundation.CGFloat) -> EKProperty.ImageContent
     public func tintColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor?
   }
   public struct TextFieldContent {
-    weak public var delegate: UIKit.UITextFieldDelegate?
+    weak public var delegate: (any UIKit.UITextFieldDelegate)?
     public var keyboardType: UIKit.UIKeyboardType
     public var isSecure: Swift.Bool
     public var leadingImage: UIKit.UIImage!
@@ -1342,9 +1378,9 @@ public struct EKProperty {
     public var accessibilityIdentifier: Swift.String?
     public var textContent: Swift.String {
       get
-      set(newValue)
+      set
     }
-    public init(delegate: UIKit.UITextFieldDelegate? = nil, keyboardType: UIKit.UIKeyboardType = .default, placeholder: EKProperty.LabelContent, tintColor: EKColor? = nil, displayMode: EKAttributes.DisplayMode = .inferred, textStyle: EKProperty.LabelStyle, isSecure: Swift.Bool = false, leadingImage: UIKit.UIImage? = nil, bottomBorderColor: EKColor = .clear, accessibilityIdentifier: Swift.String? = nil)
+    public init(delegate: (any UIKit.UITextFieldDelegate)? = nil, keyboardType: UIKit.UIKeyboardType = .default, placeholder: EKProperty.LabelContent, tintColor: EKColor? = nil, displayMode: EKAttributes.DisplayMode = .inferred, textStyle: EKProperty.LabelStyle, isSecure: Swift.Bool = false, leadingImage: UIKit.UIImage? = nil, bottomBorderColor: EKColor = .clear, accessibilityIdentifier: Swift.String? = nil)
     public func tintColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor?
     public func bottomBorderColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor?
   }
@@ -1353,10 +1389,10 @@ public struct EKProperty {
     public var separatorColor: EKColor
     public var horizontalDistributionThreshold: Swift.Int
     public var expandAnimatedly: Swift.Bool
-    public var buttonHeight: CoreGraphics.CGFloat
+    public var buttonHeight: CoreFoundation.CGFloat
     public var displayMode: EKAttributes.DisplayMode
-    public init(with buttonContents: EKProperty.ButtonContent..., separatorColor: EKColor, horizontalDistributionThreshold: Swift.Int = 2, buttonHeight: CoreGraphics.CGFloat = 50, displayMode: EKAttributes.DisplayMode = .inferred, expandAnimatedly: Swift.Bool)
-    public init(with buttonContents: [EKProperty.ButtonContent], separatorColor: EKColor, horizontalDistributionThreshold: Swift.Int = 2, buttonHeight: CoreGraphics.CGFloat = 50, displayMode: EKAttributes.DisplayMode = .inferred, expandAnimatedly: Swift.Bool)
+    public init(with buttonContents: EKProperty.ButtonContent..., separatorColor: EKColor, horizontalDistributionThreshold: Swift.Int = 2, buttonHeight: CoreFoundation.CGFloat = 50, displayMode: EKAttributes.DisplayMode = .inferred, expandAnimatedly: Swift.Bool)
+    public init(with buttonContents: [EKProperty.ButtonContent], separatorColor: EKColor, horizontalDistributionThreshold: Swift.Int = 2, buttonHeight: CoreFoundation.CGFloat = 50, displayMode: EKAttributes.DisplayMode = .inferred, expandAnimatedly: Swift.Bool)
     public func separatorColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
   }
   public struct EKRatingItemContent {
@@ -1364,31 +1400,31 @@ public struct EKProperty {
     public var description: EKProperty.LabelContent
     public var unselectedImage: EKProperty.ImageContent
     public var selectedImage: EKProperty.ImageContent
-    public var size: CoreGraphics.CGSize
-    public init(title: EKProperty.LabelContent, description: EKProperty.LabelContent, unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, size: CoreGraphics.CGSize = CGSize(width: 50, height: 50))
+    public var size: CoreFoundation.CGSize
+    public init(title: EKProperty.LabelContent, description: EKProperty.LabelContent, unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, size: CoreFoundation.CGSize = CGSize(width: 50, height: 50))
   }
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BarProgressView : UIKit.UIView, Progressive {
-  @_Concurrency.MainActor(unsafe) public var progress: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var lineColor: UIKit.UIColor
   @_Concurrency.MainActor(unsafe) public var progressRemainingColor: UIKit.UIColor {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var progressColor: UIKit.UIColor {
     get
-    set(value)
+    set
   }
-  @objc dynamic public convenience init()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc convenience dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
-    @_Concurrency.MainActor(unsafe) @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) final public class EKAlertMessageView : EKSimpleMessageView {
@@ -1398,27 +1434,27 @@ public struct EKProperty {
 }
 extension UIKit.UIView {
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func set(_ edge: QLAttribute, of value: CoreGraphics.CGFloat, relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1.0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor(unsafe) public func set(_ edge: QLAttribute, of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func set(_ edges: QLAttribute..., of value: CoreGraphics.CGFloat, relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor(unsafe) public func set(_ edges: QLAttribute..., of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func set(_ edges: [QLAttribute], to value: CoreGraphics.CGFloat, relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor(unsafe) public func set(_ edges: [QLAttribute], to value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layout(_ edge: QLAttribute? = nil, to otherEdge: QLAttribute, of view: QLView, relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1.0, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
+  @_Concurrency.MainActor(unsafe) public func layout(_ edge: QLAttribute? = nil, to otherEdge: QLAttribute, of view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layout(_ edges: QLAttribute..., to view: QLView, relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1.0, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor(unsafe) public func layout(_ edges: QLAttribute..., to view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edge: QLAttribute, relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
+  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edge: QLAttribute, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edges: QLAttribute..., relation: QLRelation = .equal, ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edges: QLAttribute..., relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(axis: QLAxis, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> QLAxisConstraints?
+  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(axis: QLAxis, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLAxisConstraints?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func sizeToSuperview(withRatio ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> QLSizeConstraints?
+  @_Concurrency.MainActor(unsafe) public func sizeToSuperview(withRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLSizeConstraints?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func centerInSuperview(offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> QLCenterConstraints?
+  @_Concurrency.MainActor(unsafe) public func centerInSuperview(offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLCenterConstraints?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func fillSuperview(withSizeRatio ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> QLFillConstraints?
+  @_Concurrency.MainActor(unsafe) public func fillSuperview(withSizeRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLFillConstraints?
   @_Concurrency.MainActor(unsafe) public var isValidForQuickLayout: Swift.Bool {
     get
   }
@@ -1427,21 +1463,21 @@ extension UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public var roundedCorners: RoundedCorners
   @_Concurrency.MainActor(unsafe) public var style: HUDBackgroundStyle {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var blurEffectStyle: UIKit.UIBlurEffect.Style {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var color: UIKit.UIColor? {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
-    @_Concurrency.MainActor(unsafe) @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
   }
   @objc deinit
 }
@@ -1488,41 +1524,41 @@ extension EKAttributes {
 @objc @_Concurrency.MainActor(unsafe) public class EKMessageContentView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public var titleContent: EKProperty.LabelContent! {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var subtitleContent: EKProperty.LabelContent! {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var titleAttributes: EKProperty.LabelStyle! {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var subtitleAttributes: EKProperty.LabelStyle! {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var title: Swift.String! {
     get
-    set(value)
+    set
   }
   @_Concurrency.MainActor(unsafe) public var subtitle: Swift.String! {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var verticalMargins: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var verticalMargins: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var horizontalMargins: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var horizontalMargins: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
-  @_Concurrency.MainActor(unsafe) public var labelsOffset: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var labelsOffset: CoreFoundation.CGFloat {
     get
-    set(value)
+    set
   }
-  @objc dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public init()
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
@@ -1530,7 +1566,7 @@ extension EKAttributes {
 @objc @_Concurrency.MainActor(unsafe) final public class EKRatingSymbolView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) final public var isSelected: Swift.Bool {
     get
-    set(newValue)
+    set
   }
   @_Concurrency.MainActor(unsafe) public init(unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, selection: @escaping EKRatingMessage.Selection)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -1545,7 +1581,7 @@ public struct EKRatingMessage {
   public var selection: EKRatingMessage.Selection!
   public var selectedIndex: Swift.Int? {
     get
-    set(newValue)
+    set
   }
   public init(initialTitle: EKProperty.LabelContent, initialDescription: EKProperty.LabelContent, ratingItems: [EKProperty.EKRatingItemContent], buttonBarContent: EKProperty.ButtonBarContent, selection: EKRatingMessage.Selection? = nil)
 }
@@ -1576,20 +1612,57 @@ extension EKAttributes {
 }
 extension Swift.Array where Element : UIKit.UIView {
   @discardableResult
-  public func set(_ edge: QLAttribute, of value: CoreGraphics.CGFloat, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  public func set(_ edge: QLAttribute, of value: CoreFoundation.CGFloat, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
   @discardableResult
-  public func set(_ edges: QLAttribute..., of value: CoreGraphics.CGFloat, priority: QLPriority = .required) -> [QLMultipleConstraints]
+  public func set(_ edges: QLAttribute..., of value: CoreFoundation.CGFloat, priority: QLPriority = .required) -> [QLMultipleConstraints]
   @discardableResult
-  public func spread(_ axis: QLAxis, stretchEdgesToSuperview: Swift.Bool = false, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  public func spread(_ axis: QLAxis, stretchEdgesToSuperview: Swift.Bool = false, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
   @discardableResult
-  public func layoutToSuperview(axis: QLAxis, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> [QLAxisConstraints]
+  public func layoutToSuperview(axis: QLAxis, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [QLAxisConstraints]
   @discardableResult
-  public func layoutToSuperview(_ edge: QLAttribute, ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  public func layoutToSuperview(_ edge: QLAttribute, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
   @discardableResult
-  public func layout(_ firstEdge: QLAttribute? = nil, to anchorEdge: QLAttribute, of anchorView: QLView, ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  public func layout(_ firstEdge: QLAttribute? = nil, to anchorEdge: QLAttribute, of anchorView: QLView, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
   @discardableResult
-  public func layout(_ edges: QLAttribute..., to anchorView: QLView, ratio: CoreGraphics.CGFloat = 1, offset: CoreGraphics.CGFloat = 0, priority: QLPriority = .required) -> [QLMultipleConstraints]
+  public func layout(_ edges: QLAttribute..., to anchorView: QLView, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [QLMultipleConstraints]
   public var isValidForQuickLayout: Swift.Bool {
     get
   }
 }
+extension SwiftyJSONError : Swift.Equatable {}
+extension SwiftyJSONError : Swift.Hashable {}
+extension SwiftyJSONError : Swift.RawRepresentable {}
+extension `Type` : Swift.Equatable {}
+extension `Type` : Swift.Hashable {}
+extension `Type` : Swift.RawRepresentable {}
+extension writingOptionsKeys : Swift.Equatable {}
+extension writingOptionsKeys : Swift.Hashable {}
+extension EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation : Swift.Equatable {}
+extension EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation : Swift.Hashable {}
+extension EKAttributes.Animation.Translate.AnchorPosition : Swift.Hashable {}
+extension EKAttributes.StatusBar : Swift.Equatable {}
+extension EKAttributes.StatusBar : Swift.Hashable {}
+extension EKAttributes.Precedence.QueueingHeuristic : Swift.Equatable {}
+extension EKAttributes.Precedence.QueueingHeuristic : Swift.Hashable {}
+extension QLAxis : Swift.Equatable {}
+extension QLAxis : Swift.Hashable {}
+extension StringeeVideoResolution : Swift.Equatable {}
+extension StringeeVideoResolution : Swift.Hashable {}
+extension StringeeVideoResolution : Swift.RawRepresentable {}
+extension StringeeCameraFacing : Swift.Equatable {}
+extension StringeeCameraFacing : Swift.Hashable {}
+extension StringeeCameraFacing : Swift.RawRepresentable {}
+extension EKAttributes.NotificationHapticFeedback : Swift.Equatable {}
+extension EKAttributes.NotificationHapticFeedback : Swift.Hashable {}
+extension HUDMode : Swift.Equatable {}
+extension HUDMode : Swift.Hashable {}
+extension HUDAnimation : Swift.Equatable {}
+extension HUDAnimation : Swift.Hashable {}
+extension HUDBackgroundStyle : Swift.Equatable {}
+extension HUDBackgroundStyle : Swift.Hashable {}
+extension EKAttributes.Position : Swift.Equatable {}
+extension EKAttributes.Position : Swift.Hashable {}
+extension EKAlertMessage.ImagePosition : Swift.Equatable {}
+extension EKAlertMessage.ImagePosition : Swift.Hashable {}
+extension EKAttributes.DisplayMode : Swift.Equatable {}
+extension EKAttributes.DisplayMode : Swift.Hashable {}

@@ -1,0 +1,1668 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name StringeeWidget
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import CallKit
+import CoreGraphics
+import CoreTelephony
+import Foundation
+import PushKit
+import Stringee
+@_exported import StringeeWidget
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+extension EKAttributes {
+  public struct LifecycleEvents {
+    public typealias Event = () -> Swift.Void
+    public var willAppear: EKAttributes.LifecycleEvents.Event?
+    public var didAppear: EKAttributes.LifecycleEvents.Event?
+    public var willDisappear: EKAttributes.LifecycleEvents.Event?
+    public var didDisappear: EKAttributes.LifecycleEvents.Event?
+    public init(willAppear: EKAttributes.LifecycleEvents.Event? = nil, didAppear: EKAttributes.LifecycleEvents.Event? = nil, willDisappear: EKAttributes.LifecycleEvents.Event? = nil, didDisappear: EKAttributes.LifecycleEvents.Event? = nil)
+  }
+}
+public struct EKAttributes {
+  public var name: Swift.String?
+  public var windowLevel: EKAttributes.WindowLevel
+  public var position: EKAttributes.Position
+  public var precedence: EKAttributes.Precedence
+  public var displayDuration: Swift.Double
+  public var positionConstraints: EKAttributes.PositionConstraints
+  public var screenInteraction: EKAttributes.UserInteraction
+  public var entryInteraction: EKAttributes.UserInteraction
+  public var scroll: EKAttributes.Scroll
+  public var hapticFeedbackType: EKAttributes.NotificationHapticFeedback
+  public var lifecycleEvents: EKAttributes.LifecycleEvents
+  public var displayMode: EKAttributes.DisplayMode
+  public var entryBackground: EKAttributes.BackgroundStyle
+  public var screenBackground: EKAttributes.BackgroundStyle
+  public var shadow: EKAttributes.Shadow
+  public var roundCorners: EKAttributes.RoundCorners
+  public var border: EKAttributes.Border
+  public var statusBar: EKAttributes.StatusBar
+  public var entranceAnimation: EKAttributes.Animation
+  public var exitAnimation: EKAttributes.Animation
+  public var popBehavior: EKAttributes.PopBehavior {
+    get
+    set
+  }
+  public init()
+}
+@_hasMissingDesignatedInitializers final public class SwiftEntryKit {
+  public enum EntryDismissalDescriptor {
+    case specific(entryName: Swift.String)
+    case prioritizedLowerOrEqualTo(priority: EKAttributes.Precedence.Priority)
+    case enqueued
+    case all
+    case displayed
+  }
+  public enum RollbackWindow {
+    case main
+    case custom(window: UIKit.UIWindow)
+  }
+  public typealias DismissCompletionHandler = () -> Swift.Void
+  final public class var window: UIKit.UIWindow? {
+    get
+  }
+  final public class var isCurrentlyDisplaying: Swift.Bool {
+    get
+  }
+  final public class func isCurrentlyDisplaying(entryNamed name: Swift.String? = nil) -> Swift.Bool
+  final public class var isQueueEmpty: Swift.Bool {
+    get
+  }
+  final public class func queueContains(entryNamed name: Swift.String? = nil) -> Swift.Bool
+  final public class func display(entry view: UIKit.UIView, using attributes: EKAttributes, presentInsideKeyWindow: Swift.Bool = false, rollbackWindow: SwiftEntryKit.RollbackWindow = .main)
+  final public class func display(entry viewController: UIKit.UIViewController, using attributes: EKAttributes, presentInsideKeyWindow: Swift.Bool = false, rollbackWindow: SwiftEntryKit.RollbackWindow = .main)
+  final public class func transform(to view: UIKit.UIView)
+  final public class func dismiss(_ descriptor: SwiftEntryKit.EntryDismissalDescriptor = .displayed, with completion: SwiftEntryKit.DismissCompletionHandler? = nil)
+  final public class func layoutIfNeeded()
+  @objc deinit
+}
+public enum SwiftyJSONError : Swift.Int, Swift.Error {
+  case unsupportedType
+  case indexOutOfBounds
+  case elementTooDeep
+  case wrongType
+  case notExist
+  case invalidJSON
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension SwiftyJSONError : Foundation.CustomNSError {
+  public static var errorDomain: Swift.String {
+    get
+  }
+  public var errorCode: Swift.Int {
+    get
+  }
+  public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
+}
+public enum Type : Swift.Int {
+  case number
+  case string
+  case bool
+  case array
+  case dictionary
+  case null
+  case unknown
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct JSON {
+  public init(data: Foundation.Data, options opt: Foundation.JSONSerialization.ReadingOptions = []) throws
+  public init(_ object: Any)
+  public init(parseJSON jsonString: Swift.String)
+  public mutating func merge(with other: JSON) throws
+  public func merged(with other: JSON) throws -> JSON
+  public var type: `Type` {
+    get
+  }
+  public var error: SwiftyJSONError? {
+    get
+  }
+  public var object: Any {
+    get
+    set
+  }
+  @available(*, unavailable, renamed: "null")
+  public static var nullJSON: JSON {
+    get
+  }
+  public static var null: JSON {
+    get
+  }
+}
+public enum Index<T> : Swift.Comparable {
+  case array(Swift.Int)
+  case dictionary(Swift.DictionaryIndex<Swift.String, T>)
+  case null
+  public static func == (lhs: Index<T>, rhs: Index<T>) -> Swift.Bool
+  public static func < (lhs: Index<T>, rhs: Index<T>) -> Swift.Bool
+}
+public typealias JSONIndex = Index<JSON>
+public typealias JSONRawIndex = Index<Any>
+extension JSON : Swift.Collection {
+  public typealias Index = JSONRawIndex
+  public var startIndex: JSON.Index {
+    get
+  }
+  public var endIndex: JSON.Index {
+    get
+  }
+  public func index(after i: JSON.Index) -> JSON.Index
+  public subscript(position: JSON.Index) -> (Swift.String, JSON) {
+    get
+  }
+  public typealias Element = (Swift.String, JSON)
+  public typealias Indices = Swift.DefaultIndices<JSON>
+  public typealias Iterator = Swift.IndexingIterator<JSON>
+  public typealias SubSequence = Swift.Slice<JSON>
+}
+public enum JSONKey {
+  case index(Swift.Int)
+  case key(Swift.String)
+}
+public protocol JSONSubscriptType {
+  var jsonKey: JSONKey { get }
+}
+extension Swift.Int : JSONSubscriptType {
+  public var jsonKey: JSONKey {
+    get
+  }
+}
+extension Swift.String : JSONSubscriptType {
+  public var jsonKey: JSONKey {
+    get
+  }
+}
+extension JSON {
+  public subscript(path: [any JSONSubscriptType]) -> JSON {
+    get
+    set
+  }
+  public subscript(path: any JSONSubscriptType...) -> JSON {
+    get
+    set
+  }
+}
+extension JSON : Swift.ExpressibleByStringLiteral {
+  public init(stringLiteral value: Swift.StringLiteralType)
+  public init(extendedGraphemeClusterLiteral value: Swift.StringLiteralType)
+  public init(unicodeScalarLiteral value: Swift.StringLiteralType)
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.StringLiteralType
+  public typealias StringLiteralType = Swift.StringLiteralType
+  public typealias UnicodeScalarLiteralType = Swift.StringLiteralType
+}
+extension JSON : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.IntegerLiteralType)
+  public typealias IntegerLiteralType = Swift.IntegerLiteralType
+}
+extension JSON : Swift.ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift.BooleanLiteralType)
+  public typealias BooleanLiteralType = Swift.BooleanLiteralType
+}
+extension JSON : Swift.ExpressibleByFloatLiteral {
+  public init(floatLiteral value: Swift.FloatLiteralType)
+  public typealias FloatLiteralType = Swift.FloatLiteralType
+}
+extension JSON : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Any)...)
+  public typealias Key = Swift.String
+  public typealias Value = Any
+}
+extension JSON : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: Any...)
+  public typealias ArrayLiteralElement = Any
+}
+extension JSON : Swift.RawRepresentable {
+  public init?(rawValue: Any)
+  public var rawValue: Any {
+    get
+  }
+  public func rawData(options opt: Foundation.JSONSerialization.WritingOptions = JSONSerialization.WritingOptions(rawValue: 0)) throws -> Foundation.Data
+  public func rawString(_ encoding: Swift.String.Encoding = .utf8, options opt: Foundation.JSONSerialization.WritingOptions = .prettyPrinted) -> Swift.String?
+  public func rawString(_ options: [writingOptionsKeys : Any]) -> Swift.String?
+  public typealias RawValue = Any
+}
+extension JSON : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension JSON {
+  public var array: [JSON]? {
+    get
+  }
+  public var arrayValue: [JSON] {
+    get
+  }
+  public var arrayObject: [Any]? {
+    get
+    set
+  }
+}
+extension JSON {
+  public var dictionary: [Swift.String : JSON]? {
+    get
+  }
+  public var dictionaryValue: [Swift.String : JSON] {
+    get
+  }
+  public var dictionaryObject: [Swift.String : Any]? {
+    get
+    set
+  }
+}
+extension JSON {
+  public var bool: Swift.Bool? {
+    get
+    set
+  }
+  public var boolValue: Swift.Bool {
+    get
+    set
+  }
+}
+extension JSON {
+  public var string: Swift.String? {
+    get
+    set
+  }
+  public var stringValue: Swift.String {
+    get
+    set
+  }
+}
+extension JSON {
+  public var number: Foundation.NSNumber? {
+    get
+    set
+  }
+  public var numberValue: Foundation.NSNumber {
+    get
+    set
+  }
+}
+extension JSON {
+  public var null: Foundation.NSNull? {
+    get
+    set
+  }
+  public func exists() -> Swift.Bool
+}
+extension JSON {
+  public var url: Foundation.URL? {
+    get
+    set
+  }
+}
+extension JSON {
+  public var double: Swift.Double? {
+    get
+    set
+  }
+  public var doubleValue: Swift.Double {
+    get
+    set
+  }
+  public var float: Swift.Float? {
+    get
+    set
+  }
+  public var floatValue: Swift.Float {
+    get
+    set
+  }
+  public var int: Swift.Int? {
+    get
+    set
+  }
+  public var intValue: Swift.Int {
+    get
+    set
+  }
+  public var uInt: Swift.UInt? {
+    get
+    set
+  }
+  public var uIntValue: Swift.UInt {
+    get
+    set
+  }
+  public var int8: Swift.Int8? {
+    get
+    set
+  }
+  public var int8Value: Swift.Int8 {
+    get
+    set
+  }
+  public var uInt8: Swift.UInt8? {
+    get
+    set
+  }
+  public var uInt8Value: Swift.UInt8 {
+    get
+    set
+  }
+  public var int16: Swift.Int16? {
+    get
+    set
+  }
+  public var int16Value: Swift.Int16 {
+    get
+    set
+  }
+  public var uInt16: Swift.UInt16? {
+    get
+    set
+  }
+  public var uInt16Value: Swift.UInt16 {
+    get
+    set
+  }
+  public var int32: Swift.Int32? {
+    get
+    set
+  }
+  public var int32Value: Swift.Int32 {
+    get
+    set
+  }
+  public var uInt32: Swift.UInt32? {
+    get
+    set
+  }
+  public var uInt32Value: Swift.UInt32 {
+    get
+    set
+  }
+  public var int64: Swift.Int64? {
+    get
+    set
+  }
+  public var int64Value: Swift.Int64 {
+    get
+    set
+  }
+  public var uInt64: Swift.UInt64? {
+    get
+    set
+  }
+  public var uInt64Value: Swift.UInt64 {
+    get
+    set
+  }
+}
+extension JSON : Swift.Comparable {
+}
+public func == (lhs: JSON, rhs: JSON) -> Swift.Bool
+public func <= (lhs: JSON, rhs: JSON) -> Swift.Bool
+public func >= (lhs: JSON, rhs: JSON) -> Swift.Bool
+public func > (lhs: JSON, rhs: JSON) -> Swift.Bool
+public func < (lhs: JSON, rhs: JSON) -> Swift.Bool
+public enum writingOptionsKeys {
+  case jsonSerialization
+  case castNilToNSNull
+  case maxObjextDepth
+  case encoding
+  public static func == (a: writingOptionsKeys, b: writingOptionsKeys) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension JSON : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+extension EKAttributes {
+  public struct PositionConstraints {
+    public enum SafeArea {
+      case overridden
+      case empty(fillSafeArea: Swift.Bool)
+      public var isOverridden: Swift.Bool {
+        get
+      }
+    }
+    public enum Edge {
+      case ratio(value: CoreFoundation.CGFloat)
+      case offset(value: CoreFoundation.CGFloat)
+      case constant(value: CoreFoundation.CGFloat)
+      case intrinsic
+      public static var fill: EKAttributes.PositionConstraints.Edge {
+        get
+      }
+    }
+    public struct Size {
+      public var width: EKAttributes.PositionConstraints.Edge
+      public var height: EKAttributes.PositionConstraints.Edge
+      public init(width: EKAttributes.PositionConstraints.Edge, height: EKAttributes.PositionConstraints.Edge)
+      public static var intrinsic: EKAttributes.PositionConstraints.Size {
+        get
+      }
+      public static var sizeToWidth: EKAttributes.PositionConstraints.Size {
+        get
+      }
+      public static var screen: EKAttributes.PositionConstraints.Size {
+        get
+      }
+    }
+    public enum KeyboardRelation {
+      public struct Offset {
+        public var bottom: CoreFoundation.CGFloat
+        public var screenEdgeResistance: CoreFoundation.CGFloat?
+        public init(bottom: CoreFoundation.CGFloat = 0, screenEdgeResistance: CoreFoundation.CGFloat? = nil)
+        public static var none: EKAttributes.PositionConstraints.KeyboardRelation.Offset {
+          get
+        }
+      }
+      case bind(offset: EKAttributes.PositionConstraints.KeyboardRelation.Offset)
+      case unbind
+      public var isBound: Swift.Bool {
+        get
+      }
+    }
+    public struct Rotation {
+      public enum SupportedInterfaceOrientation {
+        case standard
+        case all
+        public static func == (a: EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation, b: EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation) -> Swift.Bool
+        public func hash(into hasher: inout Swift.Hasher)
+        public var hashValue: Swift.Int {
+          get
+        }
+      }
+      public var isEnabled: Swift.Bool
+      public var supportedInterfaceOrientations: EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation
+      public init()
+    }
+    public var rotation: EKAttributes.PositionConstraints.Rotation
+    public var keyboardRelation: EKAttributes.PositionConstraints.KeyboardRelation
+    public var size: EKAttributes.PositionConstraints.Size
+    public var maxSize: EKAttributes.PositionConstraints.Size
+    public var verticalOffset: CoreFoundation.CGFloat
+    public var safeArea: EKAttributes.PositionConstraints.SafeArea
+    public var hasVerticalOffset: Swift.Bool {
+      get
+    }
+    public static var float: EKAttributes.PositionConstraints {
+      get
+    }
+    public static var fullWidth: EKAttributes.PositionConstraints {
+      get
+    }
+    public static var fullScreen: EKAttributes.PositionConstraints {
+      get
+    }
+    public init(verticalOffset: CoreFoundation.CGFloat = 0, size: EKAttributes.PositionConstraints.Size = .sizeToWidth, maxSize: EKAttributes.PositionConstraints.Size = .intrinsic)
+  }
+}
+extension EKAttributes {
+  public enum PopBehavior {
+    case overridden
+    case animated(animation: EKAttributes.Animation)
+    public var isOverriden: Swift.Bool {
+      get
+    }
+  }
+}
+extension EKAttributes {
+  public struct Animation : Swift.Equatable {
+    public struct Spring : Swift.Equatable {
+      public var damping: CoreFoundation.CGFloat
+      public var initialVelocity: CoreFoundation.CGFloat
+      public init(damping: CoreFoundation.CGFloat, initialVelocity: CoreFoundation.CGFloat)
+      public static func == (a: EKAttributes.Animation.Spring, b: EKAttributes.Animation.Spring) -> Swift.Bool
+    }
+    public struct RangeAnimation : Swift.Equatable {
+      public var duration: Foundation.TimeInterval
+      public var delay: Foundation.TimeInterval
+      public var start: CoreFoundation.CGFloat
+      public var end: CoreFoundation.CGFloat
+      public var spring: EKAttributes.Animation.Spring?
+      public init(from start: CoreFoundation.CGFloat, to end: CoreFoundation.CGFloat, duration: Foundation.TimeInterval, delay: Foundation.TimeInterval = 0, spring: EKAttributes.Animation.Spring? = nil)
+      public static func == (a: EKAttributes.Animation.RangeAnimation, b: EKAttributes.Animation.RangeAnimation) -> Swift.Bool
+    }
+    public struct Translate : Swift.Equatable {
+      public enum AnchorPosition : Swift.Equatable {
+        case top
+        case bottom
+        case automatic
+        public func hash(into hasher: inout Swift.Hasher)
+        public static func == (a: EKAttributes.Animation.Translate.AnchorPosition, b: EKAttributes.Animation.Translate.AnchorPosition) -> Swift.Bool
+        public var hashValue: Swift.Int {
+          get
+        }
+      }
+      public var duration: Foundation.TimeInterval
+      public var delay: Foundation.TimeInterval
+      public var anchorPosition: EKAttributes.Animation.Translate.AnchorPosition
+      public var spring: EKAttributes.Animation.Spring?
+      public init(duration: Foundation.TimeInterval, anchorPosition: EKAttributes.Animation.Translate.AnchorPosition = .automatic, delay: Foundation.TimeInterval = 0, spring: EKAttributes.Animation.Spring? = nil)
+      public static func == (a: EKAttributes.Animation.Translate, b: EKAttributes.Animation.Translate) -> Swift.Bool
+    }
+    public var translate: EKAttributes.Animation.Translate?
+    public var scale: EKAttributes.Animation.RangeAnimation?
+    public var fade: EKAttributes.Animation.RangeAnimation?
+    public var containsTranslation: Swift.Bool {
+      get
+    }
+    public var containsScale: Swift.Bool {
+      get
+    }
+    public var containsFade: Swift.Bool {
+      get
+    }
+    public var containsAnimation: Swift.Bool {
+      get
+    }
+    public var maxDelay: Foundation.TimeInterval {
+      get
+    }
+    public var maxDuration: Foundation.TimeInterval {
+      get
+    }
+    public var totalDuration: Foundation.TimeInterval {
+      get
+    }
+    public static var translation: EKAttributes.Animation {
+      get
+    }
+    public static var none: EKAttributes.Animation {
+      get
+    }
+    public init(translate: EKAttributes.Animation.Translate? = nil, scale: EKAttributes.Animation.RangeAnimation? = nil, fade: EKAttributes.Animation.RangeAnimation? = nil)
+    public static func == (a: EKAttributes.Animation, b: EKAttributes.Animation) -> Swift.Bool
+  }
+}
+@objc @_Concurrency.MainActor(unsafe) public class EKXStatusBarMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public init(leading: EKProperty.LabelContent, trailing: EKProperty.LabelContent)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) public class EKImageNoteMessageView : EKAccessoryNoteMessageView {
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent, imageContent: EKProperty.ImageContent)
+  @objc deinit
+}
+@objc public protocol StringeeWidgetDelegate {
+  @objc func onConnectionConnected(userId: Swift.String, isReconnecting: Swift.Bool)
+  @objc func onConnectionDisconnected(isReconnecting: Swift.Bool)
+  @objc func onConnectionError(code: Swift.Int, message: Swift.String)
+  @objc func onRequestNewToken()
+  @objc func onDisplayCallingViewController(vc: UIKit.UIViewController)
+  @objc func onSignalingState(state: Stringee.SignalingState)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class StringeeWidget : ObjectiveC.NSObject {
+  @objc public static let instance: StringeeWidget
+  @objc weak public var delegate: (any StringeeWidgetDelegate)?
+  @objc public var autoShowPopup: Swift.Bool
+  @objc weak public var viewToShowPopup: UIKit.UIView?
+  @objc public var stringeeClient: Stringee.StringeeClient
+  @objc public func setHost(addresses: [StringeeWidgetServerAddress])
+  @objc public func connect(token: Swift.String)
+  @objc public func disconnect()
+  @objc public func makeCall(config: StringeeCallConfig, completion: @escaping (Swift.Bool, Swift.Int, Swift.String, Swift.String?) -> Swift.Void)
+  @objc public func makeCall(token: Swift.String, config: StringeeCallConfig, completion: @escaping (Swift.Bool, Swift.Int, Swift.String, Swift.String?) -> Swift.Void)
+  @objc public func finalized(completion: ((Swift.Bool, Swift.Int, Swift.String) -> Swift.Void)? = nil)
+  @objc public func voipRegistration(delegate: (any PushKit.PKPushRegistryDelegate)? = nil)
+  @objc public func didUpdate(pushCredentials: PushKit.PKPushCredentials, for type: PushKit.PKPushType)
+  @objc public func didReceiveIncomingPushWith(payload: PushKit.PKPushPayload, for type: PushKit.PKPushType, completion: @escaping () -> Swift.Void)
+  @objc deinit
+}
+extension StringeeWidget : PushKit.PKPushRegistryDelegate {
+  @objc dynamic public func pushRegistry(_ registry: PushKit.PKPushRegistry, didUpdate pushCredentials: PushKit.PKPushCredentials, for type: PushKit.PKPushType)
+  @objc dynamic public func pushRegistry(_ registry: PushKit.PKPushRegistry, didReceiveIncomingPushWith payload: PushKit.PKPushPayload, for type: PushKit.PKPushType, completion: @escaping () -> Swift.Void)
+}
+@objc @_Concurrency.MainActor(unsafe) final public class EKFormMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public init(with title: EKProperty.LabelContent, textFieldsContent: [EKProperty.TextFieldContent], buttonContent: EKProperty.ButtonContent)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) final public func becomeFirstResponder(with textFieldIndex: Swift.Int)
+  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RoundProgressView : UIKit.UIView, Progressive {
+  @_Concurrency.MainActor(unsafe) public var isAnnular: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var progressTintColor: UIKit.UIColor {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var backgroundTintColor: UIKit.UIColor {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc convenience dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) final public class EKRatingMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public init(with message: EKRatingMessage)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension EKAttributes {
+  public enum StatusBar {
+    public typealias Appearance = (visible: Swift.Bool, style: UIKit.UIStatusBarStyle)
+    case ignored
+    case hidden
+    case dark
+    case light
+    case inferred
+    public var appearance: EKAttributes.StatusBar.Appearance {
+      get
+    }
+    public static func statusBar(by appearance: EKAttributes.StatusBar.Appearance) -> EKAttributes.StatusBar
+    public static var currentAppearance: EKAttributes.StatusBar.Appearance {
+      get
+    }
+    public static var currentStatusBar: EKAttributes.StatusBar {
+      get
+    }
+    public static func == (a: EKAttributes.StatusBar, b: EKAttributes.StatusBar) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension EKAttributes {
+  public enum Shadow {
+    case none
+    case active(with: EKAttributes.Shadow.Value)
+    public struct Value {
+      public let radius: CoreFoundation.CGFloat
+      public let opacity: Swift.Float
+      public let color: EKColor
+      public let offset: CoreFoundation.CGSize
+      public init(color: EKColor = .black, opacity: Swift.Float, radius: CoreFoundation.CGFloat, offset: CoreFoundation.CGSize = .zero)
+    }
+  }
+}
+public typealias QLAttribute = UIKit.NSLayoutConstraint.Attribute
+public typealias QLRelation = UIKit.NSLayoutConstraint.Relation
+public typealias QLView = UIKit.UIView
+public typealias QLPriority = UIKit.UILayoutPriority
+extension EKAttributes {
+  public enum Precedence {
+    public struct Priority : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable, Swift.Comparable {
+      public var rawValue: Swift.Int
+      public var hashValue: Swift.Int {
+        get
+      }
+      public init(_ rawValue: Swift.Int)
+      public init(rawValue: Swift.Int)
+      public static func == (lhs: EKAttributes.Precedence.Priority, rhs: EKAttributes.Precedence.Priority) -> Swift.Bool
+      public static func < (lhs: EKAttributes.Precedence.Priority, rhs: EKAttributes.Precedence.Priority) -> Swift.Bool
+      public typealias RawValue = Swift.Int
+    }
+    public enum QueueingHeuristic {
+      public static var value: EKAttributes.Precedence.QueueingHeuristic
+      case chronological
+      case priority
+      public static func == (a: EKAttributes.Precedence.QueueingHeuristic, b: EKAttributes.Precedence.QueueingHeuristic) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    case override(priority: EKAttributes.Precedence.Priority, dropEnqueuedEntries: Swift.Bool)
+    case enqueue(priority: EKAttributes.Precedence.Priority)
+    public var priority: EKAttributes.Precedence.Priority {
+      get
+      set
+    }
+  }
+}
+extension EKAttributes.Precedence.Priority {
+  public static let maxRawValue: Swift.Int
+  public static let highRawValue: Swift.Int
+  public static let normalRawValue: Swift.Int
+  public static let lowRawValue: Swift.Int
+  public static let minRawValue: Swift.Int
+  public static let max: EKAttributes.Precedence.Priority
+  public static let high: EKAttributes.Precedence.Priority
+  public static let normal: EKAttributes.Precedence.Priority
+  public static let low: EKAttributes.Precedence.Priority
+  public static let min: EKAttributes.Precedence.Priority
+}
+public typealias QLMultipleConstraints = [QLAttribute : UIKit.NSLayoutConstraint]
+extension UIKit.UILayoutPriority {
+  public static let must: QLPriority
+  public static let zero: QLPriority
+}
+public struct QLAttributePair {
+  public let first: QLAttribute
+  public let second: QLAttribute
+}
+public struct QLSizeConstraints {
+  public let width: UIKit.NSLayoutConstraint
+  public let height: UIKit.NSLayoutConstraint
+}
+public struct QLCenterConstraints {
+  public let x: UIKit.NSLayoutConstraint
+  public let y: UIKit.NSLayoutConstraint
+}
+public struct QLAxisConstraints {
+  public let first: UIKit.NSLayoutConstraint
+  public let second: UIKit.NSLayoutConstraint
+}
+public struct QLFillConstraints {
+  public let center: QLCenterConstraints
+  public let size: QLSizeConstraints
+}
+public struct QLPriorityPair {
+  public let horizontal: QLPriority
+  public let vertical: QLPriority
+  public static var required: QLPriorityPair {
+    get
+  }
+  public static var must: QLPriorityPair {
+    get
+  }
+  public init(_ horizontal: QLPriority, _ vertical: QLPriority)
+}
+public enum QLAxis {
+  case horizontally
+  case vertically
+  public var attributes: QLAttributePair {
+    get
+  }
+  public static func == (a: QLAxis, b: QLAxis) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension EKAttributes {
+  public enum BackgroundStyle : Swift.Equatable {
+    public struct BlurStyle : Swift.Equatable {
+      public static var extra: EKAttributes.BackgroundStyle.BlurStyle {
+        get
+      }
+      public static var standard: EKAttributes.BackgroundStyle.BlurStyle {
+        get
+      }
+      @available(iOS 10.0, *)
+      public static var prominent: EKAttributes.BackgroundStyle.BlurStyle {
+        get
+      }
+      public static var dark: EKAttributes.BackgroundStyle.BlurStyle {
+        get
+      }
+      public init(style: UIKit.UIBlurEffect.Style)
+      public init(light: UIKit.UIBlurEffect.Style, dark: UIKit.UIBlurEffect.Style)
+      public func blurStyle(for traits: UIKit.UITraitCollection, mode: EKAttributes.DisplayMode) -> UIKit.UIBlurEffect.Style
+      public func blurEffect(for traits: UIKit.UITraitCollection, mode: EKAttributes.DisplayMode) -> UIKit.UIBlurEffect
+      public static func == (a: EKAttributes.BackgroundStyle.BlurStyle, b: EKAttributes.BackgroundStyle.BlurStyle) -> Swift.Bool
+    }
+    public struct Gradient {
+      public var colors: [EKColor]
+      public var startPoint: CoreFoundation.CGPoint
+      public var endPoint: CoreFoundation.CGPoint
+      public init(colors: [EKColor], startPoint: CoreFoundation.CGPoint, endPoint: CoreFoundation.CGPoint)
+    }
+    case visualEffect(style: EKAttributes.BackgroundStyle.BlurStyle)
+    case color(color: EKColor)
+    case gradient(gradient: EKAttributes.BackgroundStyle.Gradient)
+    case image(image: UIKit.UIImage)
+    case clear
+    public static func == (lhs: EKAttributes.BackgroundStyle, rhs: EKAttributes.BackgroundStyle) -> Swift.Bool
+  }
+}
+extension EKAttributes {
+  public enum Scroll {
+    public struct PullbackAnimation {
+      public var duration: Foundation.TimeInterval
+      public var damping: CoreFoundation.CGFloat
+      public var initialSpringVelocity: CoreFoundation.CGFloat
+      public init(duration: Foundation.TimeInterval, damping: CoreFoundation.CGFloat, initialSpringVelocity: CoreFoundation.CGFloat)
+      public static var jolt: EKAttributes.Scroll.PullbackAnimation {
+        get
+      }
+      public static var easeOut: EKAttributes.Scroll.PullbackAnimation {
+        get
+      }
+    }
+    case disabled
+    case edgeCrossingDisabled(swipeable: Swift.Bool)
+    case enabled(swipeable: Swift.Bool, pullbackAnimation: EKAttributes.Scroll.PullbackAnimation)
+  }
+}
+extension EKAttributes {
+  public enum RoundCorners {
+    case none
+    case all(radius: CoreFoundation.CGFloat)
+    case top(radius: CoreFoundation.CGFloat)
+    case bottom(radius: CoreFoundation.CGFloat)
+  }
+  public enum Border {
+    case none
+    case value(color: UIKit.UIColor, width: CoreFoundation.CGFloat)
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RoundedButton : UIKit.UIButton {
+  @_Concurrency.MainActor(unsafe) public var roundedCorners: RoundedCorners
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func setTitleColor(_ color: UIKit.UIColor?, for state: UIKit.UIControl.State)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isHighlighted: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class EKAccessoryNoteMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc public enum StringeeVideoResolution : Swift.Int {
+  case normal = 0
+  case hd = 1
+  case full_hd = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol HUDDelegate : AnyObject {
+  func hudWasHidden(_ hud: HUD)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class HUD : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: (any HUDDelegate)?
+  @_Concurrency.MainActor(unsafe) public var completionBlock: (() -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) public var graceTime: Swift.Double
+  @_Concurrency.MainActor(unsafe) public var minShowTime: Swift.Double
+  @_Concurrency.MainActor(unsafe) public var removeFromSuperViewOnHide: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var mode: HUDMode {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var contentColor: UIKit.UIColor {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var animationType: HUDAnimation
+  @_Concurrency.MainActor(unsafe) public var offset: CoreFoundation.CGPoint {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public static let maxOffset: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var margin: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var topBottomMargin: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var minSize: CoreFoundation.CGSize {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var isSquare: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var isMotionEffectsEnabled: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var progressObject: Foundation.Progress? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var bezelView: BackgroundView {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var backgroundView: BackgroundView {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var customView: UIKit.UIView? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var label: UIKit.UILabel {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var detailsLabel: UIKit.UILabel {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var button: RoundedButton {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) convenience public init(with view: UIKit.UIView)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension HUD {
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public class func show(to view: UIKit.UIView, animated: Swift.Bool) -> HUD
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public class func hide(for view: UIKit.UIView, animated: Swift.Bool) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public class func hud(for view: UIKit.UIView) -> HUD?
+  @_Concurrency.MainActor(unsafe) public func show(animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) public func hide(animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) public func hide(animated: Swift.Bool, afterDelay delay: Foundation.TimeInterval)
+}
+extension HUD {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
+}
+extension HUD {
+  @_Concurrency.MainActor(unsafe) open func commonInit()
+}
+extension HUD {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func updateConstraints()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+}
+public struct EKSimpleMessage {
+  public let image: EKProperty.ImageContent?
+  public let title: EKProperty.LabelContent
+  public let description: EKProperty.LabelContent
+  public init(image: EKProperty.ImageContent? = nil, title: EKProperty.LabelContent, description: EKProperty.LabelContent)
+}
+public struct EKPopUpMessage {
+  public typealias EKPopUpMessageAction = () -> ()
+  public struct ThemeImage {
+    public enum Position {
+      case topToTop(offset: CoreFoundation.CGFloat)
+      case centerToTop(offset: CoreFoundation.CGFloat)
+    }
+    public var image: EKProperty.ImageContent
+    public var position: EKPopUpMessage.ThemeImage.Position
+    public init(image: EKProperty.ImageContent, position: EKPopUpMessage.ThemeImage.Position = .topToTop(offset: 40))
+  }
+  public var themeImage: EKPopUpMessage.ThemeImage?
+  public var title: EKProperty.LabelContent
+  public var description: EKProperty.LabelContent
+  public var button: EKProperty.ButtonContent
+  public var action: EKPopUpMessage.EKPopUpMessageAction
+  public init(themeImage: EKPopUpMessage.ThemeImage? = nil, title: EKProperty.LabelContent, description: EKProperty.LabelContent, button: EKProperty.ButtonContent, action: @escaping EKPopUpMessage.EKPopUpMessageAction)
+}
+@objc @_Concurrency.MainActor(unsafe) public class EKNoteMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var horizontalOffset: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var verticalOffset: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) final public class EKNotificationMessageView : EKSimpleMessageView {
+  @_Concurrency.MainActor(unsafe) public init(with message: EKNotificationMessage)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+public struct EKColor : Swift.Equatable {
+  public var dark: UIKit.UIColor {
+    get
+  }
+  public var light: UIKit.UIColor {
+    get
+  }
+  public init(light: UIKit.UIColor, dark: UIKit.UIColor)
+  public init(_ unified: UIKit.UIColor)
+  public init(rgb: Swift.Int)
+  public init(red: Swift.Int, green: Swift.Int, blue: Swift.Int)
+  public func color(for traits: UIKit.UITraitCollection, mode: EKAttributes.DisplayMode) -> UIKit.UIColor
+  public static func == (a: EKColor, b: EKColor) -> Swift.Bool
+}
+extension EKColor {
+  public var inverted: EKColor {
+    get
+  }
+  public func with(alpha: CoreFoundation.CGFloat) -> EKColor
+  public static var white: EKColor {
+    get
+  }
+  public static var black: EKColor {
+    get
+  }
+  public static var clear: EKColor {
+    get
+  }
+  public static var standardBackground: EKColor {
+    get
+  }
+  public static var standardContent: EKColor {
+    get
+  }
+}
+@objc @_Concurrency.MainActor(unsafe) public class EKProcessingNoteMessageView : EKAccessoryNoteMessageView {
+  @_Concurrency.MainActor(unsafe) public var isProcessing: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent, activityIndicator: UIKit.UIActivityIndicatorView.Style)
+  @objc deinit
+}
+extension EKAttributes {
+  public static var `default`: EKAttributes
+  public static var toast: EKAttributes {
+    get
+  }
+  public static var float: EKAttributes {
+    get
+  }
+  public static var topFloat: EKAttributes {
+    get
+  }
+  public static var bottomFloat: EKAttributes {
+    get
+  }
+  public static var centerFloat: EKAttributes {
+    get
+  }
+  public static var bottomToast: EKAttributes {
+    get
+  }
+  public static var topToast: EKAttributes {
+    get
+  }
+  public static var topNote: EKAttributes {
+    get
+  }
+  public static var bottomNote: EKAttributes {
+    get
+  }
+  public static var statusBar: EKAttributes {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class StringeeCallConfig : ObjectiveC.NSObject {
+  @objc public var from: Swift.String
+  @objc public var to: Swift.String
+  @objc public var toAlias: Swift.String
+  @objc public var customData: Swift.String?
+  @objc public var isVideoCall: Swift.Bool
+  @objc public var resolution: StringeeVideoResolution
+  @objc public var cameraMode: StringeeCameraFacing
+  public var scanViewConfig: StringeeScanViewConfig?
+  @objc public func setOvalConfig(_ config: OvalConfig)
+  @objc public func setRectangleConfig(_ config: RectangleConfig)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum StringeeScanViewConfig {
+  case rectangle(RectangleConfig)
+  case oval(OvalConfig)
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class OvalConfig : ObjectiveC.NSObject {
+  @objc public var boderColor: UIKit.UIColor
+  @objc public var overlayColor: UIKit.UIColor
+  @objc public var widthRatio: CoreFoundation.CGFloat
+  @objc public var aspectRatio: CoreFoundation.CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class RectangleConfig : ObjectiveC.NSObject {
+  @objc public var widthRatio: CoreFoundation.CGFloat
+  @objc public var aspectRatio: CoreFoundation.CGFloat
+  @objc public var color: UIKit.UIColor
+  @objc public var radius: CoreFoundation.CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum StringeeCameraFacing : Swift.Int {
+  case front = 0
+  case back = 1
+  case both = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func forceContentWrap(_ axes: QLAxis...)
+  @_Concurrency.MainActor(unsafe) public func forceContentWrap()
+  @_Concurrency.MainActor(unsafe) public var verticalHuggingPriority: QLPriority {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var horizontalHuggingPriority: QLPriority {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var contentHuggingPriority: QLPriorityPair {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var verticalCompressionResistancePriority: QLPriority {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var horizontalCompressionResistancePriority: QLPriority {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var contentCompressionResistancePriority: QLPriorityPair {
+    get
+    set
+  }
+}
+public protocol Progressive : AnyObject {
+  var progress: CoreFoundation.CGFloat { get set }
+}
+extension EKAttributes {
+  public enum NotificationHapticFeedback {
+    case success
+    case warning
+    case error
+    case none
+    public static func == (a: EKAttributes.NotificationHapticFeedback, b: EKAttributes.NotificationHapticFeedback) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) final public class EKRatingSymbolsContainerView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) final public func setup(with message: EKRatingMessage, externalSelection: @escaping EKRatingMessage.Selection)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public enum HUDMode {
+  case indeterminate
+  case determinate
+  case determinateHorizontalBar
+  case annularDeterminate
+  case customView
+  case text
+  public static func == (a: HUDMode, b: HUDMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum HUDAnimation {
+  case fade
+  case zoom
+  case zoomOut
+  case zoomIn
+  public static func == (a: HUDAnimation, b: HUDAnimation) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum HUDBackgroundStyle {
+  case solidColor
+  case blur
+  public static func == (a: HUDBackgroundStyle, b: HUDBackgroundStyle) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RoundedCorners {
+  case radius(CoreFoundation.CGFloat)
+  case fully
+}
+extension EKAttributes {
+  public enum Position {
+    case top
+    case bottom
+    case center
+    public var isTop: Swift.Bool {
+      get
+    }
+    public var isCenter: Swift.Bool {
+      get
+    }
+    public var isBottom: Swift.Bool {
+      get
+    }
+    public static func == (a: EKAttributes.Position, b: EKAttributes.Position) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public struct EKAlertMessage {
+  public enum ImagePosition {
+    case top
+    case left
+    public static func == (a: EKAlertMessage.ImagePosition, b: EKAlertMessage.ImagePosition) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public let imagePosition: EKAlertMessage.ImagePosition
+  public let simpleMessage: EKSimpleMessage
+  public let buttonBarContent: EKProperty.ButtonBarContent
+  public init(simpleMessage: EKSimpleMessage, imagePosition: EKAlertMessage.ImagePosition = .top, buttonBarContent: EKProperty.ButtonBarContent)
+}
+@objc @_Concurrency.MainActor(unsafe) final public class EKButtonBarView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public init(with buttonBarContent: EKProperty.ButtonBarContent)
+  @_Concurrency.MainActor(unsafe) @objc override final public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) final public func expand()
+  @_Concurrency.MainActor(unsafe) final public func compress()
+  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+public struct EKNotificationMessage {
+  public struct Insets {
+    public var contentInsets: UIKit.UIEdgeInsets
+    public var titleToDescription: CoreFoundation.CGFloat
+    public static var `default`: EKNotificationMessage.Insets
+  }
+  public let simpleMessage: EKSimpleMessage
+  public let auxiliary: EKProperty.LabelContent?
+  public let insets: EKNotificationMessage.Insets
+  public init(simpleMessage: EKSimpleMessage, auxiliary: EKProperty.LabelContent? = nil, insets: EKNotificationMessage.Insets = .default)
+}
+@objc @_Concurrency.MainActor(unsafe) final public class EKTextField : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) final public var text: Swift.String {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.TextFieldContent)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) final public func makeFirstResponder()
+  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+public struct EKProperty {
+  public struct ButtonContent {
+    public typealias Action = () -> ()
+    public var label: EKProperty.LabelContent
+    public var backgroundColor: EKColor
+    public var highlightedBackgroundColor: EKColor
+    public var contentEdgeInset: CoreFoundation.CGFloat
+    public var displayMode: EKAttributes.DisplayMode
+    public var accessibilityIdentifier: Swift.String?
+    public var action: EKProperty.ButtonContent.Action?
+    public init(label: EKProperty.LabelContent, backgroundColor: EKColor, highlightedBackgroundColor: EKColor, contentEdgeInset: CoreFoundation.CGFloat = 5, displayMode: EKAttributes.DisplayMode = .inferred, accessibilityIdentifier: Swift.String? = nil, action: @escaping EKProperty.ButtonContent.Action = {})
+    public func backgroundColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
+    public func highlightedBackgroundColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
+    public func highlighedLabelColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
+  }
+  public struct LabelContent {
+    public var text: Swift.String
+    public var style: EKProperty.LabelStyle
+    public var accessibilityIdentifier: Swift.String?
+    public init(text: Swift.String, style: EKProperty.LabelStyle, accessibilityIdentifier: Swift.String? = nil)
+  }
+  public struct LabelStyle {
+    public var font: UIKit.UIFont
+    public var color: EKColor
+    public var alignment: UIKit.NSTextAlignment
+    public var numberOfLines: Swift.Int
+    public var displayMode: EKAttributes.DisplayMode
+    public init(font: UIKit.UIFont, color: EKColor, alignment: UIKit.NSTextAlignment = .left, displayMode: EKAttributes.DisplayMode = .inferred, numberOfLines: Swift.Int = 0)
+    public func color(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
+  }
+  public struct ImageContent {
+    public enum TransformAnimation {
+      case animate(duration: Foundation.TimeInterval, options: UIKit.UIView.AnimationOptions, transform: CoreFoundation.CGAffineTransform)
+      case none
+    }
+    public var tint: EKColor?
+    public var images: [UIKit.UIImage]
+    public var imageSequenceAnimationDuration: Foundation.TimeInterval
+    public var size: CoreFoundation.CGSize?
+    public var contentMode: UIKit.UIView.ContentMode
+    public var makesRound: Swift.Bool
+    public var animation: EKProperty.ImageContent.TransformAnimation
+    public var displayMode: EKAttributes.DisplayMode
+    public var accessibilityIdentifier: Swift.String?
+    public init(imageName: Swift.String, animation: EKProperty.ImageContent.TransformAnimation = .none, displayMode: EKAttributes.DisplayMode = .inferred, size: CoreFoundation.CGSize? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, tint: EKColor? = nil, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public init(image: UIKit.UIImage, animation: EKProperty.ImageContent.TransformAnimation = .none, displayMode: EKAttributes.DisplayMode = .inferred, size: CoreFoundation.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public init(images: [UIKit.UIImage], imageSequenceAnimationDuration: Foundation.TimeInterval = 1, displayMode: EKAttributes.DisplayMode = .inferred, animation: EKProperty.ImageContent.TransformAnimation = .none, size: CoreFoundation.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public init(imagesNames: [Swift.String], imageSequenceAnimationDuration: Foundation.TimeInterval = 1, displayMode: EKAttributes.DisplayMode = .inferred, animation: EKProperty.ImageContent.TransformAnimation = .none, size: CoreFoundation.CGSize? = nil, tint: EKColor? = nil, contentMode: UIKit.UIView.ContentMode = .scaleToFill, makesRound: Swift.Bool = false, accessibilityIdentifier: Swift.String? = nil)
+    public static func thumb(with image: UIKit.UIImage, edgeSize: CoreFoundation.CGFloat) -> EKProperty.ImageContent
+    public static func thumb(with imageName: Swift.String, edgeSize: CoreFoundation.CGFloat) -> EKProperty.ImageContent
+    public func tintColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor?
+  }
+  public struct TextFieldContent {
+    weak public var delegate: (any UIKit.UITextFieldDelegate)?
+    public var keyboardType: UIKit.UIKeyboardType
+    public var isSecure: Swift.Bool
+    public var leadingImage: UIKit.UIImage!
+    public var placeholder: EKProperty.LabelContent
+    public var textStyle: EKProperty.LabelStyle
+    public var tintColor: EKColor!
+    public var displayMode: EKAttributes.DisplayMode
+    public var bottomBorderColor: EKColor
+    public var accessibilityIdentifier: Swift.String?
+    public var textContent: Swift.String {
+      get
+      set
+    }
+    public init(delegate: (any UIKit.UITextFieldDelegate)? = nil, keyboardType: UIKit.UIKeyboardType = .default, placeholder: EKProperty.LabelContent, tintColor: EKColor? = nil, displayMode: EKAttributes.DisplayMode = .inferred, textStyle: EKProperty.LabelStyle, isSecure: Swift.Bool = false, leadingImage: UIKit.UIImage? = nil, bottomBorderColor: EKColor = .clear, accessibilityIdentifier: Swift.String? = nil)
+    public func tintColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor?
+    public func bottomBorderColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor?
+  }
+  public struct ButtonBarContent {
+    public var content: [EKProperty.ButtonContent]
+    public var separatorColor: EKColor
+    public var horizontalDistributionThreshold: Swift.Int
+    public var expandAnimatedly: Swift.Bool
+    public var buttonHeight: CoreFoundation.CGFloat
+    public var displayMode: EKAttributes.DisplayMode
+    public init(with buttonContents: EKProperty.ButtonContent..., separatorColor: EKColor, horizontalDistributionThreshold: Swift.Int = 2, buttonHeight: CoreFoundation.CGFloat = 50, displayMode: EKAttributes.DisplayMode = .inferred, expandAnimatedly: Swift.Bool)
+    public init(with buttonContents: [EKProperty.ButtonContent], separatorColor: EKColor, horizontalDistributionThreshold: Swift.Int = 2, buttonHeight: CoreFoundation.CGFloat = 50, displayMode: EKAttributes.DisplayMode = .inferred, expandAnimatedly: Swift.Bool)
+    public func separatorColor(for traitCollection: UIKit.UITraitCollection) -> UIKit.UIColor
+  }
+  public struct EKRatingItemContent {
+    public var title: EKProperty.LabelContent
+    public var description: EKProperty.LabelContent
+    public var unselectedImage: EKProperty.ImageContent
+    public var selectedImage: EKProperty.ImageContent
+    public var size: CoreFoundation.CGSize
+    public init(title: EKProperty.LabelContent, description: EKProperty.LabelContent, unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, size: CoreFoundation.CGSize = CGSize(width: 50, height: 50))
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BarProgressView : UIKit.UIView, Progressive {
+  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var lineColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) public var progressRemainingColor: UIKit.UIColor {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var progressColor: UIKit.UIColor {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc convenience dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) final public class EKAlertMessageView : EKSimpleMessageView {
+  @_Concurrency.MainActor(unsafe) public init(with message: EKAlertMessage)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension UIKit.UIView {
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func set(_ edge: QLAttribute, of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func set(_ edges: QLAttribute..., of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func set(_ edges: [QLAttribute], to value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func layout(_ edge: QLAttribute? = nil, to otherEdge: QLAttribute, of view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func layout(_ edges: QLAttribute..., to view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edge: QLAttribute, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edges: QLAttribute..., relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(axis: QLAxis, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLAxisConstraints?
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func sizeToSuperview(withRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLSizeConstraints?
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func centerInSuperview(offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLCenterConstraints?
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func fillSuperview(withSizeRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLFillConstraints?
+  @_Concurrency.MainActor(unsafe) public var isValidForQuickLayout: Swift.Bool {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BackgroundView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var roundedCorners: RoundedCorners
+  @_Concurrency.MainActor(unsafe) public var style: HUDBackgroundStyle {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var blurEffectStyle: UIKit.UIBlurEffect.Style {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var color: UIKit.UIColor? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @objc deinit
+}
+extension EKAttributes {
+  public enum DisplayMode {
+    case inferred
+    case light
+    case dark
+    public static func == (a: EKAttributes.DisplayMode, b: EKAttributes.DisplayMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension EKAttributes {
+  public struct UserInteraction {
+    public typealias Action = () -> ()
+    public enum Default {
+      case absorbTouches
+      case delayExit(by: Foundation.TimeInterval)
+      case dismissEntry
+      case forward
+    }
+    public var defaultAction: EKAttributes.UserInteraction.Default
+    public var customTapActions: [EKAttributes.UserInteraction.Action]
+    public init(defaultAction: EKAttributes.UserInteraction.Default = .absorbTouches, customTapActions: [EKAttributes.UserInteraction.Action] = [])
+    public static var dismiss: EKAttributes.UserInteraction {
+      get
+    }
+    public static var forward: EKAttributes.UserInteraction {
+      get
+    }
+    public static var absorbTouches: EKAttributes.UserInteraction {
+      get
+    }
+    public static func delayExit(by delay: Foundation.TimeInterval) -> EKAttributes.UserInteraction
+  }
+}
+@objc @objcMembers public class StringeeWidgetServerAddress : ObjectiveC.NSObject {
+  @objc public init(host: Swift.String, port: Swift.Int)
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) public class EKMessageContentView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var titleContent: EKProperty.LabelContent! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var subtitleContent: EKProperty.LabelContent! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var titleAttributes: EKProperty.LabelStyle! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var subtitleAttributes: EKProperty.LabelStyle! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var title: Swift.String! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var subtitle: Swift.String! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var verticalMargins: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var horizontalMargins: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var labelsOffset: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) final public class EKRatingSymbolView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) final public var isSelected: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public init(unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, selection: @escaping EKRatingMessage.Selection)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+public struct EKRatingMessage {
+  public typealias Selection = (Swift.Int) -> Swift.Void
+  public var initialTitle: EKProperty.LabelContent
+  public var initialDescription: EKProperty.LabelContent
+  public var ratingItems: [EKProperty.EKRatingItemContent]
+  public var buttonBarContent: EKProperty.ButtonBarContent
+  public var selection: EKRatingMessage.Selection!
+  public var selectedIndex: Swift.Int? {
+    get
+    set
+  }
+  public init(initialTitle: EKProperty.LabelContent, initialDescription: EKProperty.LabelContent, ratingItems: [EKProperty.EKRatingItemContent], buttonBarContent: EKProperty.ButtonBarContent, selection: EKRatingMessage.Selection? = nil)
+}
+@objc @_Concurrency.MainActor(unsafe) final public class EKPopUpMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public init(with message: EKPopUpMessage)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+extension EKAttributes {
+  public typealias DisplayDuration = Foundation.TimeInterval
+}
+extension EKAttributes {
+  public enum WindowLevel {
+    case alerts
+    case statusBar
+    case normal
+    case custom(level: UIKit.UIWindow.Level)
+    public var value: UIKit.UIWindow.Level {
+      get
+    }
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class EKSimpleMessageView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+}
+extension Swift.Array where Element : UIKit.UIView {
+  @discardableResult
+  public func set(_ edge: QLAttribute, of value: CoreFoundation.CGFloat, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  @discardableResult
+  public func set(_ edges: QLAttribute..., of value: CoreFoundation.CGFloat, priority: QLPriority = .required) -> [QLMultipleConstraints]
+  @discardableResult
+  public func spread(_ axis: QLAxis, stretchEdgesToSuperview: Swift.Bool = false, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  @discardableResult
+  public func layoutToSuperview(axis: QLAxis, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [QLAxisConstraints]
+  @discardableResult
+  public func layoutToSuperview(_ edge: QLAttribute, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  @discardableResult
+  public func layout(_ firstEdge: QLAttribute? = nil, to anchorEdge: QLAttribute, of anchorView: QLView, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [UIKit.NSLayoutConstraint]
+  @discardableResult
+  public func layout(_ edges: QLAttribute..., to anchorView: QLView, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> [QLMultipleConstraints]
+  public var isValidForQuickLayout: Swift.Bool {
+    get
+  }
+}
+extension SwiftyJSONError : Swift.Equatable {}
+extension SwiftyJSONError : Swift.Hashable {}
+extension SwiftyJSONError : Swift.RawRepresentable {}
+extension `Type` : Swift.Equatable {}
+extension `Type` : Swift.Hashable {}
+extension `Type` : Swift.RawRepresentable {}
+extension writingOptionsKeys : Swift.Equatable {}
+extension writingOptionsKeys : Swift.Hashable {}
+extension EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation : Swift.Equatable {}
+extension EKAttributes.PositionConstraints.Rotation.SupportedInterfaceOrientation : Swift.Hashable {}
+extension EKAttributes.Animation.Translate.AnchorPosition : Swift.Hashable {}
+extension EKAttributes.StatusBar : Swift.Equatable {}
+extension EKAttributes.StatusBar : Swift.Hashable {}
+extension EKAttributes.Precedence.QueueingHeuristic : Swift.Equatable {}
+extension EKAttributes.Precedence.QueueingHeuristic : Swift.Hashable {}
+extension QLAxis : Swift.Equatable {}
+extension QLAxis : Swift.Hashable {}
+extension StringeeVideoResolution : Swift.Equatable {}
+extension StringeeVideoResolution : Swift.Hashable {}
+extension StringeeVideoResolution : Swift.RawRepresentable {}
+extension StringeeCameraFacing : Swift.Equatable {}
+extension StringeeCameraFacing : Swift.Hashable {}
+extension StringeeCameraFacing : Swift.RawRepresentable {}
+extension EKAttributes.NotificationHapticFeedback : Swift.Equatable {}
+extension EKAttributes.NotificationHapticFeedback : Swift.Hashable {}
+extension HUDMode : Swift.Equatable {}
+extension HUDMode : Swift.Hashable {}
+extension HUDAnimation : Swift.Equatable {}
+extension HUDAnimation : Swift.Hashable {}
+extension HUDBackgroundStyle : Swift.Equatable {}
+extension HUDBackgroundStyle : Swift.Hashable {}
+extension EKAttributes.Position : Swift.Equatable {}
+extension EKAttributes.Position : Swift.Hashable {}
+extension EKAlertMessage.ImagePosition : Swift.Equatable {}
+extension EKAlertMessage.ImagePosition : Swift.Hashable {}
+extension EKAttributes.DisplayMode : Swift.Equatable {}
+extension EKAttributes.DisplayMode : Swift.Hashable {}
