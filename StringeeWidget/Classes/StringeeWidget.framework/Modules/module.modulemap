@@ -1,7 +1,7 @@
 framework module StringeeWidget {
   umbrella header "StringeeWidget.h"
-
   export *
+
   module * { export * }
 }
 
