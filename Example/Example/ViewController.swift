@@ -13,6 +13,9 @@ let stringeeToken = "eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjo
 
 let zxcvbnmToken = "eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLkFCMmFIeUpVNkVwakEyMHN6MWw2NG1WRklhVzRaQ1YyLTE3MjAwNzYxOTIiLCJpc3MiOiJTSy4wLkFCMmFIeUpVNkVwakEyMHN6MWw2NG1WRklhVzRaQ1YyIiwiZXhwIjoxNzIyNjY4MTkyLCJ1c2VySWQiOiJ6eGN2Ym5tIn0.hMs2bpNTV1AyPndvDfPEtaC-OObLDQ2pAfUHHxo2gzs"
 
+let tai1 =
+"eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTS0UxUmRVdFVhWXhOYVFRNFdyMTVxRjF6VUp1UWRBYVZULTE3MjAwODI3NDQiLCJpc3MiOiJTS0UxUmRVdFVhWXhOYVFRNFdyMTVxRjF6VUp1UWRBYVZUIiwiZXhwIjoxNzIyNjc0NzQ0LCJ1c2VySWQiOiJ0YWkxIn0.rpLrL3-hLbOaNl89jYpes0ziV_BRHbpv_m9Bn7Ki2T8"
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var lbUserId: UILabel!
@@ -24,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         StringeeWidget.instance.delegate = self
-        StringeeWidget.instance.connect(token: stringeeToken)
+        StringeeWidget.instance.connect(token: tai1)
         // StringeeWidget.instance.voipRegistration()
 
         lbUserId.text = "Connecting..."

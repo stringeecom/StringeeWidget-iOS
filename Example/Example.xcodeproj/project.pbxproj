@@ -13,6 +13,8 @@
 		2209728B2C36835100DC9084 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2209728A2C36835100DC9084 /* Assets.xcassets */; };
 		2209728E2C36835100DC9084 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2209728D2C36835100DC9084 /* Base */; };
 		220972962C36852000DC9084 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220972952C36852000DC9084 /* Main.storyboard */; };
+		221CAF942C4E63EB00E63482 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 221CAF932C4E63EB00E63482 /* config.json */; };
+		221CAF962C4E645000E63482 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CAF952C4E645000E63482 /* Config.swift */; };
 		F4319098FE158726838C012B /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 963268CC82ECBB1E6B992DF3 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,8 @@
 		2209728D2C36835100DC9084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2209728F2C36835100DC9084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		220972952C36852000DC9084 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		221CAF932C4E63EB00E63482 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		221CAF952C4E645000E63482 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		90B9FB109AA739BC08066267 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		963268CC82ECBB1E6B992DF3 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8C6153ED844E53D73BF4C28 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 		220972802C36835000DC9084 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				221CAF972C4E651400E63482 /* Env */,
 				220972812C36835000DC9084 /* AppDelegate.swift */,
 				220972832C36835000DC9084 /* SceneDelegate.swift */,
 				220972852C36835000DC9084 /* ViewController.swift */,
@@ -70,8 +75,17 @@
 				2209728A2C36835100DC9084 /* Assets.xcassets */,
 				2209728C2C36835100DC9084 /* LaunchScreen.storyboard */,
 				2209728F2C36835100DC9084 /* Info.plist */,
+				221CAF932C4E63EB00E63482 /* config.json */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		221CAF972C4E651400E63482 /* Env */ = {
+			isa = PBXGroup;
+			children = (
+				221CAF952C4E645000E63482 /* Config.swift */,
+			);
+			path = Env;
 			sourceTree = "<group>";
 		};
 		7BD584AE2C4F9E4C23C0D0EA /* Pods */ = {
@@ -152,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2209728B2C36835100DC9084 /* Assets.xcassets in Resources */,
+				221CAF942C4E63EB00E63482 /* config.json in Resources */,
 				2209728E2C36835100DC9084 /* Base in Resources */,
 				220972962C36852000DC9084 /* Main.storyboard in Resources */,
 			);
@@ -207,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				220972862C36835000DC9084 /* ViewController.swift in Sources */,
+				221CAF962C4E645000E63482 /* Config.swift in Sources */,
 				220972822C36835000DC9084 /* AppDelegate.swift in Sources */,
 				220972842C36835000DC9084 /* SceneDelegate.swift in Sources */,
 			);
@@ -357,6 +373,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StringeeWidgetExample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -387,6 +404,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StringeeWidgetExample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
