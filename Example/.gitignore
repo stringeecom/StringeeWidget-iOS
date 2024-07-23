@@ -2,4 +2,4 @@
 Podfile.lock
 .DS_Store
 
-config.json
+Example/config.json
