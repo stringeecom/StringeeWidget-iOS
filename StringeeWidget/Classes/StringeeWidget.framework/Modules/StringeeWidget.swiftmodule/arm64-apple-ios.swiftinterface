@@ -617,6 +617,7 @@ extension EKAttributes {
   @objc public var autoShowPopup: Swift.Bool
   @objc weak public var viewToShowPopup: UIKit.UIView?
   @objc public var stringeeClient: Stringee.StringeeClient
+  public func applyUIConfig(_ config: StringeeCallUIConfig)
   @objc public func setHost(addresses: [StringeeWidgetServerAddress])
   @objc public func connect(token: Swift.String)
   @objc public func disconnect()
@@ -1574,6 +1575,19 @@ extension EKAttributes {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
+public struct StringeeCallUIConfig {
+  public var statsPosition: StatsAlignment
+  public init(statsPosition: StatsAlignment)
+}
+public enum StatsAlignment {
+  case right
+  case center
+  public static func == (a: StatsAlignment, b: StatsAlignment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 public struct EKRatingMessage {
   public typealias Selection = (Swift.Int) -> Swift.Void
   public var initialTitle: EKProperty.LabelContent
@@ -1668,3 +1682,5 @@ extension EKAlertMessage.ImagePosition : Swift.Equatable {}
 extension EKAlertMessage.ImagePosition : Swift.Hashable {}
 extension EKAttributes.DisplayMode : Swift.Equatable {}
 extension EKAttributes.DisplayMode : Swift.Hashable {}
+extension StatsAlignment : Swift.Equatable {}
+extension StatsAlignment : Swift.Hashable {}

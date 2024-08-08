@@ -9,12 +9,8 @@ import UIKit
 import StringeeWidget
 import Stringee
 
-let stringeeToken = "eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLkFCMmFIeUpVNkVwakEyMHN6MWw2NG1WRklhVzRaQ1YyLTE3MTk5OTA1MDciLCJpc3MiOiJTSy4wLkFCMmFIeUpVNkVwakEyMHN6MWw2NG1WRklhVzRaQ1YyIiwiZXhwIjoxNzIyNTgyNTA3LCJ1c2VySWQiOiJhYmNkZWYifQ.aReF31ln_3jZgVyqfPwd3VAMfrlWS89pInN0MOwR5HE"
-
-let zxcvbnmToken = "eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLkFCMmFIeUpVNkVwakEyMHN6MWw2NG1WRklhVzRaQ1YyLTE3MjAwNzYxOTIiLCJpc3MiOiJTSy4wLkFCMmFIeUpVNkVwakEyMHN6MWw2NG1WRklhVzRaQ1YyIiwiZXhwIjoxNzIyNjY4MTkyLCJ1c2VySWQiOiJ6eGN2Ym5tIn0.hMs2bpNTV1AyPndvDfPEtaC-OObLDQ2pAfUHHxo2gzs"
-
-let tai1 =
-"eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTS0UxUmRVdFVhWXhOYVFRNFdyMTVxRjF6VUp1UWRBYVZULTE3MjAwODI3NDQiLCJpc3MiOiJTS0UxUmRVdFVhWXhOYVFRNFdyMTVxRjF6VUp1UWRBYVZUIiwiZXhwIjoxNzIyNjc0NzQ0LCJ1c2VySWQiOiJ0YWkxIn0.rpLrL3-hLbOaNl89jYpes0ziV_BRHbpv_m9Bn7Ki2T8"
+let token =
+"eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLmtYd2x0cGRLVldxejl3eElBV1hiSHVWazVSTXZkbFVWLTE3MjI5MTY5NjUiLCJpc3MiOiJTSy4wLmtYd2x0cGRLVldxejl3eElBV1hiSHVWazVSTXZkbFVWIiwiZXhwIjoxNzI1NTA4OTY1LCJ1c2VySWQiOiJ1c2VySWQxIn0.B5GQ4aMQ68pERiDn1vzUmof6uGzwXZsdXrguqCQt1pk"
 
 class ViewController: UIViewController {
 
@@ -27,10 +23,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         StringeeWidget.instance.delegate = self
-        StringeeWidget.instance.connect(token: tai1)
+        StringeeWidget.instance.connect(token: token)
         // StringeeWidget.instance.voipRegistration()
 
         lbUserId.text = "Connecting..."
+
+        StringeeWidget.instance.applyUIConfig(StringeeCallUIConfig(statsPosition: .center))
     }
 
     @IBAction func call(_ sender: Any) {

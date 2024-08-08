@@ -19,6 +19,6 @@ The Stringee platform, developed by Stringee, makes it easy to embed high-qualit
   s.public_header_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
 
   s.vendored_frameworks = 'StringeeWidget/Classes/**/StringeeWidget.framework'
-  s.dependency "Stringee", '1.9.21'
+  s.dependency "Stringee", '1.9.24'
 
 end
