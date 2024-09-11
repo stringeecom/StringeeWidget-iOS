@@ -1576,8 +1576,8 @@ extension EKAttributes {
   @objc deinit
 }
 public struct StringeeCallUIConfig {
-  public var statsPosition: StatsAlignment
-  public init(statsPosition: StatsAlignment)
+  public var statsPosition: StatsAlignment?
+  public init(statsPosition: StatsAlignment?)
 }
 public enum StatsAlignment {
   case right
