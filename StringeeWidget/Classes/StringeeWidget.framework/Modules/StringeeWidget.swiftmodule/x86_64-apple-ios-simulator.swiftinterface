@@ -1,19 +1,22 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
-// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name StringeeWidget
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-bare-slash-regex -module-name StringeeWidget
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import AVFoundation
 import CallKit
 import CoreGraphics
 import CoreTelephony
+import DeveloperToolsSupport
 import Foundation
 import PushKit
 import Stringee
 @_exported import StringeeWidget
 import Swift
+import SwiftUI
 import UIKit
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 extension EKAttributes {
   public struct LifecycleEvents {
     public typealias Event = () -> Swift.Void
@@ -591,14 +594,14 @@ extension EKAttributes {
     public static func == (a: EKAttributes.Animation, b: EKAttributes.Animation) -> Swift.Bool
   }
 }
-@objc @_Concurrency.MainActor(unsafe) public class EKXStatusBarMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public init(leading: EKProperty.LabelContent, trailing: EKProperty.LabelContent)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+@objc @_Concurrency.MainActor @preconcurrency public class EKXStatusBarMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(leading: EKProperty.LabelContent, trailing: EKProperty.LabelContent)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @_Concurrency.MainActor(unsafe) public class EKImageNoteMessageView : EKAccessoryNoteMessageView {
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent, imageContent: EKProperty.ImageContent)
+@objc @_Concurrency.MainActor @preconcurrency public class EKImageNoteMessageView : EKAccessoryNoteMessageView {
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency public init(with content: EKProperty.LabelContent, imageContent: EKProperty.ImageContent)
   @objc deinit
 }
 @objc public protocol StringeeWidgetDelegate {
@@ -630,39 +633,39 @@ extension StringeeWidget : PushKit.PKPushRegistryDelegate {
   @objc dynamic public func pushRegistry(_ registry: PushKit.PKPushRegistry, didUpdate pushCredentials: PushKit.PKPushCredentials, for type: PushKit.PKPushType)
   @objc dynamic public func pushRegistry(_ registry: PushKit.PKPushRegistry, didReceiveIncomingPushWith payload: PushKit.PKPushPayload, for type: PushKit.PKPushType, completion: @escaping () -> Swift.Void)
 }
-@objc @_Concurrency.MainActor(unsafe) final public class EKFormMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public init(with title: EKProperty.LabelContent, textFieldsContent: [EKProperty.TextFieldContent], buttonContent: EKProperty.ButtonContent)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) final public func becomeFirstResponder(with textFieldIndex: Swift.Int)
-  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+@objc @_Concurrency.MainActor @preconcurrency final public class EKFormMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(with title: EKProperty.LabelContent, textFieldsContent: [EKProperty.TextFieldContent], buttonContent: EKProperty.ButtonContent)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency final public func becomeFirstResponder(with textFieldIndex: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RoundProgressView : UIKit.UIView, Progressive {
-  @_Concurrency.MainActor(unsafe) public var isAnnular: Swift.Bool
-  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class RoundProgressView : UIKit.UIView, Progressive {
+  @_Concurrency.MainActor @preconcurrency public var isAnnular: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var progress: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var progressTintColor: UIKit.UIColor {
+  @_Concurrency.MainActor @preconcurrency public var progressTintColor: UIKit.UIColor {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var backgroundTintColor: UIKit.UIColor {
+  @_Concurrency.MainActor @preconcurrency public var backgroundTintColor: UIKit.UIColor {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc convenience dynamic public init()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+  @_Concurrency.MainActor @preconcurrency @objc convenience dynamic public init()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
     @objc get
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
   @objc deinit
 }
-@objc @_Concurrency.MainActor(unsafe) final public class EKRatingMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public init(with message: EKRatingMessage)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+@objc @_Concurrency.MainActor @preconcurrency final public class EKRatingMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(with message: EKRatingMessage)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
 extension EKAttributes {
@@ -865,24 +868,24 @@ extension EKAttributes {
     case value(color: UIKit.UIColor, width: CoreFoundation.CGFloat)
   }
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class RoundedButton : UIKit.UIButton {
-  @_Concurrency.MainActor(unsafe) public var roundedCorners: RoundedCorners
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class RoundedButton : UIKit.UIButton {
+  @_Concurrency.MainActor @preconcurrency public var roundedCorners: RoundedCorners
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
     @objc get
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func setTitleColor(_ color: UIKit.UIColor?, for state: UIKit.UIControl.State)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isHighlighted: Swift.Bool {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func setTitleColor(_ color: UIKit.UIColor?, for state: UIKit.UIControl.State)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var isHighlighted: Swift.Bool {
     @objc get
     @objc set
   }
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class EKAccessoryNoteMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class EKAccessoryNoteMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 @objc public enum StringeeVideoResolution : Swift.Int {
@@ -898,102 +901,102 @@ extension EKAttributes {
 public protocol HUDDelegate : AnyObject {
   func hudWasHidden(_ hud: HUD)
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class HUD : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) weak public var delegate: (any HUDDelegate)?
-  @_Concurrency.MainActor(unsafe) public var completionBlock: (() -> Swift.Void)?
-  @_Concurrency.MainActor(unsafe) public var graceTime: Swift.Double
-  @_Concurrency.MainActor(unsafe) public var minShowTime: Swift.Double
-  @_Concurrency.MainActor(unsafe) public var removeFromSuperViewOnHide: Swift.Bool
-  @_Concurrency.MainActor(unsafe) public var mode: HUDMode {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class HUD : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any HUDDelegate)?
+  @_Concurrency.MainActor @preconcurrency public var completionBlock: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var graceTime: Swift.Double
+  @_Concurrency.MainActor @preconcurrency public var minShowTime: Swift.Double
+  @_Concurrency.MainActor @preconcurrency public var removeFromSuperViewOnHide: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var mode: HUDMode {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var contentColor: UIKit.UIColor {
+  @_Concurrency.MainActor @preconcurrency public var contentColor: UIKit.UIColor {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var animationType: HUDAnimation
-  @_Concurrency.MainActor(unsafe) public var offset: CoreFoundation.CGPoint {
+  @_Concurrency.MainActor @preconcurrency public var animationType: HUDAnimation
+  @_Concurrency.MainActor @preconcurrency public var offset: CoreFoundation.CGPoint {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public static let maxOffset: CoreFoundation.CGFloat
-  @_Concurrency.MainActor(unsafe) public var margin: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public static let maxOffset: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public var margin: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var topBottomMargin: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public var topBottomMargin: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var minSize: CoreFoundation.CGSize {
+  @_Concurrency.MainActor @preconcurrency public var minSize: CoreFoundation.CGSize {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var isSquare: Swift.Bool {
+  @_Concurrency.MainActor @preconcurrency public var isSquare: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var isMotionEffectsEnabled: Swift.Bool {
+  @_Concurrency.MainActor @preconcurrency public var isMotionEffectsEnabled: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public var progress: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var progressObject: Foundation.Progress? {
+  @_Concurrency.MainActor @preconcurrency public var progressObject: Foundation.Progress? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var bezelView: BackgroundView {
+  @_Concurrency.MainActor @preconcurrency public var bezelView: BackgroundView {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var backgroundView: BackgroundView {
+  @_Concurrency.MainActor @preconcurrency public var backgroundView: BackgroundView {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var customView: UIKit.UIView? {
+  @_Concurrency.MainActor @preconcurrency public var customView: UIKit.UIView? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var label: UIKit.UILabel {
+  @_Concurrency.MainActor @preconcurrency public var label: UIKit.UILabel {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var detailsLabel: UIKit.UILabel {
+  @_Concurrency.MainActor @preconcurrency public var detailsLabel: UIKit.UILabel {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var button: RoundedButton {
+  @_Concurrency.MainActor @preconcurrency public var button: RoundedButton {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) convenience public init(with view: UIKit.UIView)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency convenience public init(with view: UIKit.UIView)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
 extension HUD {
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public class func show(to view: UIKit.UIView, animated: Swift.Bool) -> HUD
+  @_Concurrency.MainActor @preconcurrency public class func show(to view: UIKit.UIView, animated: Swift.Bool) -> HUD
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public class func hide(for view: UIKit.UIView, animated: Swift.Bool) -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) public class func hud(for view: UIKit.UIView) -> HUD?
-  @_Concurrency.MainActor(unsafe) public func show(animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) public func hide(animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) public func hide(animated: Swift.Bool, afterDelay delay: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency public class func hide(for view: UIKit.UIView, animated: Swift.Bool) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public class func hud(for view: UIKit.UIView) -> HUD?
+  @_Concurrency.MainActor @preconcurrency public func show(animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func hide(animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func hide(animated: Swift.Bool, afterDelay delay: Foundation.TimeInterval)
 }
 extension HUD {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func didMoveToSuperview()
 }
 extension HUD {
-  @_Concurrency.MainActor(unsafe) open func commonInit()
+  @_Concurrency.MainActor @preconcurrency open func commonInit()
 }
 extension HUD {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func updateConstraints()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func updateConstraints()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func layoutSubviews()
 }
 public struct EKSimpleMessage {
   public let image: EKProperty.ImageContent?
@@ -1019,23 +1022,23 @@ public struct EKPopUpMessage {
   public var action: EKPopUpMessage.EKPopUpMessageAction
   public init(themeImage: EKPopUpMessage.ThemeImage? = nil, title: EKProperty.LabelContent, description: EKProperty.LabelContent, button: EKProperty.ButtonContent, action: @escaping EKPopUpMessage.EKPopUpMessageAction)
 }
-@objc @_Concurrency.MainActor(unsafe) public class EKNoteMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var horizontalOffset: CoreFoundation.CGFloat {
+@objc @_Concurrency.MainActor @preconcurrency public class EKNoteMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var horizontalOffset: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var verticalOffset: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public var verticalOffset: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency public init(with content: EKProperty.LabelContent)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) final public class EKNotificationMessageView : EKSimpleMessageView {
-  @_Concurrency.MainActor(unsafe) public init(with message: EKNotificationMessage)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class EKNotificationMessageView : EKSimpleMessageView {
+  @_Concurrency.MainActor @preconcurrency public init(with message: EKNotificationMessage)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
 public struct EKColor : Swift.Equatable {
@@ -1073,13 +1076,13 @@ extension EKColor {
     get
   }
 }
-@objc @_Concurrency.MainActor(unsafe) public class EKProcessingNoteMessageView : EKAccessoryNoteMessageView {
-  @_Concurrency.MainActor(unsafe) public var isProcessing: Swift.Bool {
+@objc @_Concurrency.MainActor @preconcurrency public class EKProcessingNoteMessageView : EKAccessoryNoteMessageView {
+  @_Concurrency.MainActor @preconcurrency public var isProcessing: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.LabelContent, activityIndicator: UIKit.UIActivityIndicatorView.Style)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency public init(with content: EKProperty.LabelContent, activityIndicator: UIKit.UIActivityIndicatorView.Style)
   @objc deinit
 }
 extension EKAttributes {
@@ -1160,29 +1163,29 @@ public enum StringeeScanViewConfig {
   }
 }
 extension UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public func forceContentWrap(_ axes: QLAxis...)
-  @_Concurrency.MainActor(unsafe) public func forceContentWrap()
-  @_Concurrency.MainActor(unsafe) public var verticalHuggingPriority: QLPriority {
+  @_Concurrency.MainActor @preconcurrency public func forceContentWrap(_ axes: QLAxis...)
+  @_Concurrency.MainActor @preconcurrency public func forceContentWrap()
+  @_Concurrency.MainActor @preconcurrency public var verticalHuggingPriority: QLPriority {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var horizontalHuggingPriority: QLPriority {
+  @_Concurrency.MainActor @preconcurrency public var horizontalHuggingPriority: QLPriority {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var contentHuggingPriority: QLPriorityPair {
+  @_Concurrency.MainActor @preconcurrency public var contentHuggingPriority: QLPriorityPair {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var verticalCompressionResistancePriority: QLPriority {
+  @_Concurrency.MainActor @preconcurrency public var verticalCompressionResistancePriority: QLPriority {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var horizontalCompressionResistancePriority: QLPriority {
+  @_Concurrency.MainActor @preconcurrency public var horizontalCompressionResistancePriority: QLPriority {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var contentCompressionResistancePriority: QLPriorityPair {
+  @_Concurrency.MainActor @preconcurrency public var contentCompressionResistancePriority: QLPriorityPair {
     get
     set
   }
@@ -1203,10 +1206,10 @@ extension EKAttributes {
     }
   }
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) final public class EKRatingSymbolsContainerView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) final public func setup(with message: EKRatingMessage, externalSelection: @escaping EKRatingMessage.Selection)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency final public class EKRatingSymbolsContainerView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency final public func setup(with message: EKRatingMessage, externalSelection: @escaping EKRatingMessage.Selection)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public enum HUDMode {
@@ -1282,13 +1285,13 @@ public struct EKAlertMessage {
   public let buttonBarContent: EKProperty.ButtonBarContent
   public init(simpleMessage: EKSimpleMessage, imagePosition: EKAlertMessage.ImagePosition = .top, buttonBarContent: EKProperty.ButtonBarContent)
 }
-@objc @_Concurrency.MainActor(unsafe) final public class EKButtonBarView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) public init(with buttonBarContent: EKProperty.ButtonBarContent)
-  @_Concurrency.MainActor(unsafe) @objc override final public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) final public func expand()
-  @_Concurrency.MainActor(unsafe) final public func compress()
-  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+@objc @_Concurrency.MainActor @preconcurrency final public class EKButtonBarView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency public init(with buttonBarContent: EKProperty.ButtonBarContent)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency final public func expand()
+  @_Concurrency.MainActor @preconcurrency final public func compress()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
 public struct EKNotificationMessage {
@@ -1302,15 +1305,15 @@ public struct EKNotificationMessage {
   public let insets: EKNotificationMessage.Insets
   public init(simpleMessage: EKSimpleMessage, auxiliary: EKProperty.LabelContent? = nil, insets: EKNotificationMessage.Insets = .default)
 }
-@objc @_Concurrency.MainActor(unsafe) final public class EKTextField : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) final public var text: Swift.String {
+@objc @_Concurrency.MainActor @preconcurrency final public class EKTextField : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency final public var text: Swift.String {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public init(with content: EKProperty.TextFieldContent)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) final public func makeFirstResponder()
-  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor @preconcurrency public init(with content: EKProperty.TextFieldContent)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency final public func makeFirstResponder()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
 public struct EKProperty {
@@ -1404,79 +1407,79 @@ public struct EKProperty {
     public init(title: EKProperty.LabelContent, description: EKProperty.LabelContent, unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, size: CoreFoundation.CGSize = CGSize(width: 50, height: 50))
   }
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BarProgressView : UIKit.UIView, Progressive {
-  @_Concurrency.MainActor(unsafe) public var progress: CoreFoundation.CGFloat {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class BarProgressView : UIKit.UIView, Progressive {
+  @_Concurrency.MainActor @preconcurrency public var progress: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var lineColor: UIKit.UIColor
-  @_Concurrency.MainActor(unsafe) public var progressRemainingColor: UIKit.UIColor {
+  @_Concurrency.MainActor @preconcurrency public var lineColor: UIKit.UIColor
+  @_Concurrency.MainActor @preconcurrency public var progressRemainingColor: UIKit.UIColor {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var progressColor: UIKit.UIColor {
+  @_Concurrency.MainActor @preconcurrency public var progressColor: UIKit.UIColor {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc convenience dynamic public init()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+  @_Concurrency.MainActor @preconcurrency @objc convenience dynamic public init()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
     @objc get
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) final public class EKAlertMessageView : EKSimpleMessageView {
-  @_Concurrency.MainActor(unsafe) public init(with message: EKAlertMessage)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class EKAlertMessageView : EKSimpleMessageView {
+  @_Concurrency.MainActor @preconcurrency public init(with message: EKAlertMessage)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
 extension UIKit.UIView {
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func set(_ edge: QLAttribute, of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint
+  @_Concurrency.MainActor @preconcurrency public func set(_ edge: QLAttribute, of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func set(_ edges: QLAttribute..., of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor @preconcurrency public func set(_ edges: QLAttribute..., of value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func set(_ edges: [QLAttribute], to value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor @preconcurrency public func set(_ edges: [QLAttribute], to value: CoreFoundation.CGFloat, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layout(_ edge: QLAttribute? = nil, to otherEdge: QLAttribute, of view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
+  @_Concurrency.MainActor @preconcurrency public func layout(_ edge: QLAttribute? = nil, to otherEdge: QLAttribute, of view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layout(_ edges: QLAttribute..., to view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor @preconcurrency public func layout(_ edges: QLAttribute..., to view: QLView, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1.0, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edge: QLAttribute, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
+  @_Concurrency.MainActor @preconcurrency public func layoutToSuperview(_ edge: QLAttribute, relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> UIKit.NSLayoutConstraint?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(_ edges: QLAttribute..., relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
+  @_Concurrency.MainActor @preconcurrency public func layoutToSuperview(_ edges: QLAttribute..., relation: QLRelation = .equal, ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLMultipleConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func layoutToSuperview(axis: QLAxis, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLAxisConstraints?
+  @_Concurrency.MainActor @preconcurrency public func layoutToSuperview(axis: QLAxis, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLAxisConstraints?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func sizeToSuperview(withRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLSizeConstraints?
+  @_Concurrency.MainActor @preconcurrency public func sizeToSuperview(withRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLSizeConstraints?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func centerInSuperview(offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLCenterConstraints?
+  @_Concurrency.MainActor @preconcurrency public func centerInSuperview(offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLCenterConstraints?
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func fillSuperview(withSizeRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLFillConstraints?
-  @_Concurrency.MainActor(unsafe) public var isValidForQuickLayout: Swift.Bool {
+  @_Concurrency.MainActor @preconcurrency public func fillSuperview(withSizeRatio ratio: CoreFoundation.CGFloat = 1, offset: CoreFoundation.CGFloat = 0, priority: QLPriority = .required) -> QLFillConstraints?
+  @_Concurrency.MainActor @preconcurrency public var isValidForQuickLayout: Swift.Bool {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BackgroundView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var roundedCorners: RoundedCorners
-  @_Concurrency.MainActor(unsafe) public var style: HUDBackgroundStyle {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class BackgroundView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var roundedCorners: RoundedCorners
+  @_Concurrency.MainActor @preconcurrency public var style: HUDBackgroundStyle {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var blurEffectStyle: UIKit.UIBlurEffect.Style {
+  @_Concurrency.MainActor @preconcurrency public var blurEffectStyle: UIKit.UIBlurEffect.Style {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var color: UIKit.UIColor? {
+  @_Concurrency.MainActor @preconcurrency public var color: UIKit.UIColor? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
     @objc get
   }
   @objc deinit
@@ -1521,55 +1524,55 @@ extension EKAttributes {
   @objc public init(host: Swift.String, port: Swift.Int)
   @objc deinit
 }
-@objc @_Concurrency.MainActor(unsafe) public class EKMessageContentView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var titleContent: EKProperty.LabelContent! {
+@objc @_Concurrency.MainActor @preconcurrency public class EKMessageContentView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var titleContent: EKProperty.LabelContent! {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var subtitleContent: EKProperty.LabelContent! {
+  @_Concurrency.MainActor @preconcurrency public var subtitleContent: EKProperty.LabelContent! {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var titleAttributes: EKProperty.LabelStyle! {
+  @_Concurrency.MainActor @preconcurrency public var titleAttributes: EKProperty.LabelStyle! {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var subtitleAttributes: EKProperty.LabelStyle! {
+  @_Concurrency.MainActor @preconcurrency public var subtitleAttributes: EKProperty.LabelStyle! {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var title: Swift.String! {
+  @_Concurrency.MainActor @preconcurrency public var title: Swift.String! {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var subtitle: Swift.String! {
+  @_Concurrency.MainActor @preconcurrency public var subtitle: Swift.String! {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var verticalMargins: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public var verticalMargins: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var horizontalMargins: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public var horizontalMargins: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public var labelsOffset: CoreFoundation.CGFloat {
+  @_Concurrency.MainActor @preconcurrency public var labelsOffset: CoreFoundation.CGFloat {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc dynamic public init()
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
-@objc @_Concurrency.MainActor(unsafe) final public class EKRatingSymbolView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) final public var isSelected: Swift.Bool {
+@objc @_Concurrency.MainActor @preconcurrency final public class EKRatingSymbolView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency final public var isSelected: Swift.Bool {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) public init(unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, selection: @escaping EKRatingMessage.Selection)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency public init(unselectedImage: EKProperty.ImageContent, selectedImage: EKProperty.ImageContent, selection: @escaping EKRatingMessage.Selection)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
 public struct EKRatingMessage {
@@ -1585,10 +1588,10 @@ public struct EKRatingMessage {
   }
   public init(initialTitle: EKProperty.LabelContent, initialDescription: EKProperty.LabelContent, ratingItems: [EKProperty.EKRatingItemContent], buttonBarContent: EKProperty.ButtonBarContent, selection: EKRatingMessage.Selection? = nil)
 }
-@objc @_Concurrency.MainActor(unsafe) final public class EKPopUpMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public init(with message: EKPopUpMessage)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+@objc @_Concurrency.MainActor @preconcurrency final public class EKPopUpMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(with message: EKPopUpMessage)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
 extension EKAttributes {
@@ -1605,9 +1608,9 @@ extension EKAttributes {
     }
   }
 }
-@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class EKSimpleMessageView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class EKSimpleMessageView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @objc deinit
 }
 extension Swift.Array where Element : UIKit.UIView {
