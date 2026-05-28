@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'StringeeWidget'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Developed by Stringee'
 
   s.description      = <<-DESC
@@ -9,16 +9,16 @@ The Stringee platform, developed by Stringee, makes it easy to embed high-qualit
                        DESC
 
   s.homepage         = 'https://github.com/stringeecom/StringeeWidget-iOS'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT' }
   s.author           = { 'Stringee' => 'info@stringee.com' }
-  s.source           = { :git => 'https://github.com/stringeecom/StringeeWidget-iOS.git', :tag => s.version.to_s }
+  s.source           = { :http => 'https://github.com/stringeecom/StringeeWidget-iOS/releases/download/0.2.2/StringeeWidget.xcframework.zip' }
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '13.0'
 
-  s.source_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
-  s.public_header_files = 'StringeeWidget/Classes/**/StringeeWidget.framework/Headers/*.h'
+  s.source_files = 'StringeeWidget.xcframework/**/StringeeWidget.framework/Headers/*.h'
+  s.public_header_files = 'StringeeWidget.xcframework/**/StringeeWidget.framework/Headers/*.h'
 
-  s.vendored_frameworks = 'StringeeWidget/Classes/**/StringeeWidget.framework'
-  s.dependency "Stringee", '1.9.28'
+  s.vendored_frameworks = 'StringeeWidget.xcframework'
+  s.dependency "Stringee", '2.0.2'
 
 end
