@@ -7,5 +7,4 @@ framework module StringeeWidget {
 
 module StringeeWidget.Swift {
   header "StringeeWidget-Swift.h"
-  requires objc
 }
