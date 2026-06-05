@@ -30668,17 +30668,24 @@
           {
             "kind": "Function",
             "name": "configureAudioSession",
-            "printedName": "configureAudioSession()",
+            "printedName": "configureAudioSession(defaultToSpeaker:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
               }
             ],
             "declKind": "Func",
-            "usr": "s:14StringeeWidget13SXCallManagerC21configureAudioSessionyyF",
-            "mangledName": "$s14StringeeWidget13SXCallManagerC21configureAudioSessionyyF",
+            "usr": "s:14StringeeWidget13SXCallManagerC21configureAudioSession16defaultToSpeakerySb_tF",
+            "mangledName": "$s14StringeeWidget13SXCallManagerC21configureAudioSession16defaultToSpeakerySb_tF",
             "moduleName": "StringeeWidget",
             "isOpen": true,
             "funcSelfKind": "NonMutating"
@@ -47929,6 +47936,98 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "userChangedSpeaker",
+            "printedName": "userChangedSpeaker",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvp",
+            "mangledName": "$s14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvp",
+            "moduleName": "StringeeWidget",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 59,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvg",
+                "mangledName": "$s14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvg",
+                "moduleName": "StringeeWidget",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvs",
+                "mangledName": "$s14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvs",
+                "moduleName": "StringeeWidget",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvM",
+                "mangledName": "$s14StringeeWidget23SXCallingViewControllerC18userChangedSpeakerSbvM",
+                "moduleName": "StringeeWidget",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(control:call:)",
@@ -49324,6 +49423,49 @@
             "declKind": "Func",
             "usr": "s:14StringeeWidget23SXCallingViewControllerC35handleDidHandleOnAnotherDeviceEvent14signalingState6reason7sipCode0P6ReasonySo09SignalingN0V_SSSgs5Int32VAKtF",
             "mangledName": "$s14StringeeWidget23SXCallingViewControllerC35handleDidHandleOnAnotherDeviceEvent14signalingState6reason7sipCode0P6ReasonySo09SignalingN0V_SSSgs5Int32VAKtF",
+            "moduleName": "StringeeWidget",
+            "isOpen": true,
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "routeVideoCallToSpeakerIfNeeded",
+            "printedName": "routeVideoCallToSpeakerIfNeeded(reason:delay:remainingRetries:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "hasDefaultArg": true,
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "hasDefaultArg": true,
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:14StringeeWidget23SXCallingViewControllerC31routeVideoCallToSpeakerIfNeeded6reason5delay16remainingRetriesySS_SdSitF",
+            "mangledName": "$s14StringeeWidget23SXCallingViewControllerC31routeVideoCallToSpeakerIfNeeded6reason5delay16remainingRetriesySS_SdSitF",
             "moduleName": "StringeeWidget",
             "isOpen": true,
             "declAttributes": [
@@ -111348,14 +111490,21 @@
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallManager.swift",
       "kind": "BooleanLiteral",
-      "offset": 20322,
+      "offset": 8205,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 20666,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallManager.swift",
       "kind": "BooleanLiteral",
-      "offset": 24643,
+      "offset": 24987,
       "length": 4,
       "value": "true"
     },
@@ -111844,190 +111993,211 @@
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4644,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "StringLiteral",
-      "offset": 22063,
+      "offset": 22082,
       "length": 112,
       "value": "\"call_stream local_received type=call2 call_id=\""
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "StringLiteral",
-      "offset": 22174,
+      "offset": 22193,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 22324,
+      "offset": 22343,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 22435,
+      "offset": 22454,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 22441,
+      "offset": 22460,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 22612,
+      "offset": 22631,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 22963,
+      "offset": 22982,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 23007,
+      "offset": 23026,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 23448,
+      "offset": 23467,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23814,
+      "offset": 23833,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "StringLiteral",
-      "offset": 23855,
+      "offset": 23874,
       "length": 113,
       "value": "\"call_stream remote_received type=call2 call_id=\""
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "StringLiteral",
-      "offset": 23967,
+      "offset": 23986,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24065,
+      "offset": 24084,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24071,
+      "offset": 24090,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24318,
+      "offset": 24337,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24540,
+      "offset": 24559,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24593,
+      "offset": 24612,
       "length": 2,
       "value": "50"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24645,
+      "offset": 24664,
       "length": 3,
       "value": "120"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24686,
+      "offset": 24705,
       "length": 3,
       "value": "150"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25201,
+      "offset": 25220,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25207,
+      "offset": 25226,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25618,
+      "offset": 25637,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25666,
+      "offset": 25685,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 26131,
+      "offset": 26150,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 26475,
+      "offset": 26494,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26527,
+      "offset": 26546,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 33396,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 33423,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/november\/Developer\/stringeewidget-ios-universal\/StringeeWidget\/Controller\/SXCallingViewController.swift",
       "kind": "StringLiteral",
-      "offset": 42160,
+      "offset": 44234,
       "length": 26,
       "value": "\"Kết thúc cuộc gọi\""
     },
