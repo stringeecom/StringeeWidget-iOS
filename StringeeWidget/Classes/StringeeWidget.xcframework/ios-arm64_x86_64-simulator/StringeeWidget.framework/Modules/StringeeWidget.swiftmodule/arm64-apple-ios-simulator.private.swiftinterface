@@ -1,0 +1,1764 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)
+// swift-module-flags: -target arm64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name StringeeWidget
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import AVFoundation
+import CallKit
+import CoreGraphics
+import CoreTelephony
+import DeveloperToolsSupport
+import Foundation
+import PushKit
+import Stringee
+@_exported import StringeeWidget
+import Swift
+import SwiftUI
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+extension StringeeWidget::EKAttributes {
+  public struct LifecycleEvents {
+    public typealias Event = () -> Swift::Void
+    public var willAppear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event?
+    public var didAppear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event?
+    public var willDisappear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event?
+    public var didDisappear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event?
+    public init(willAppear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event? = nil, didAppear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event? = nil, willDisappear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event? = nil, didDisappear: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents.StringeeWidget::Event? = nil)
+  }
+}
+public struct EKAttributes {
+  public var name: Swift::String?
+  public var windowLevel: StringeeWidget::EKAttributes.StringeeWidget::WindowLevel
+  public var position: StringeeWidget::EKAttributes.StringeeWidget::Position
+  public var precedence: StringeeWidget::EKAttributes.StringeeWidget::Precedence
+  public var displayDuration: Swift::Double
+  public var positionConstraints: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints
+  public var screenInteraction: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction
+  public var entryInteraction: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction
+  public var scroll: StringeeWidget::EKAttributes.StringeeWidget::Scroll
+  public var hapticFeedbackType: StringeeWidget::EKAttributes.StringeeWidget::NotificationHapticFeedback
+  public var lifecycleEvents: StringeeWidget::EKAttributes.StringeeWidget::LifecycleEvents
+  public var displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode
+  public var entryBackground: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle
+  public var screenBackground: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle
+  public var shadow: StringeeWidget::EKAttributes.StringeeWidget::Shadow
+  public var roundCorners: StringeeWidget::EKAttributes.StringeeWidget::RoundCorners
+  public var border: StringeeWidget::EKAttributes.StringeeWidget::Border
+  public var statusBar: StringeeWidget::EKAttributes.StringeeWidget::StatusBar
+  public var entranceAnimation: StringeeWidget::EKAttributes.StringeeWidget::Animation
+  public var exitAnimation: StringeeWidget::EKAttributes.StringeeWidget::Animation
+  public var popBehavior: StringeeWidget::EKAttributes.StringeeWidget::PopBehavior {
+    get
+    set
+  }
+  public init()
+}
+@_hasMissingDesignatedInitializers final public class SwiftEntryKit {
+  public enum EntryDismissalDescriptor {
+    case specific(entryName: Swift::String)
+    case prioritizedLowerOrEqualTo(priority: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority)
+    case enqueued
+    case all
+    case displayed
+  }
+  public enum RollbackWindow {
+    case main
+    case custom(window: UIKit::UIWindow)
+  }
+  public typealias DismissCompletionHandler = () -> Swift::Void
+  final public class var window: UIKit::UIWindow? {
+    get
+  }
+  final public class var isCurrentlyDisplaying: Swift::Bool {
+    get
+  }
+  final public class func isCurrentlyDisplaying(entryNamed name: Swift::String? = nil) -> Swift::Bool
+  final public class var isQueueEmpty: Swift::Bool {
+    get
+  }
+  final public class func queueContains(entryNamed name: Swift::String? = nil) -> Swift::Bool
+  final public class func display(entry view: UIKit::UIView, using attributes: StringeeWidget::EKAttributes, presentInsideKeyWindow: Swift::Bool = false, rollbackWindow: StringeeWidget::SwiftEntryKit.StringeeWidget::RollbackWindow = .main)
+  final public class func display(entry viewController: UIKit::UIViewController, using attributes: StringeeWidget::EKAttributes, presentInsideKeyWindow: Swift::Bool = false, rollbackWindow: StringeeWidget::SwiftEntryKit.StringeeWidget::RollbackWindow = .main)
+  final public class func transform(to view: UIKit::UIView)
+  final public class func dismiss(_ descriptor: StringeeWidget::SwiftEntryKit.StringeeWidget::EntryDismissalDescriptor = .displayed, with completion: StringeeWidget::SwiftEntryKit.StringeeWidget::DismissCompletionHandler? = nil)
+  final public class func layoutIfNeeded()
+  @objc deinit
+}
+public enum SwiftyJSONError : Swift::Int, Swift::Error {
+  case unsupportedType
+  case indexOutOfBounds
+  case elementTooDeep
+  case wrongType
+  case notExist
+  case invalidJSON
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+extension StringeeWidget::SwiftyJSONError : Foundation::CustomNSError {
+  public static var errorDomain: Swift::String {
+    get
+  }
+  public var errorCode: Swift::Int {
+    get
+  }
+  public var errorUserInfo: [Swift::String : Any] {
+    get
+  }
+}
+public enum Type : Swift::Int {
+  case number
+  case string
+  case bool
+  case array
+  case dictionary
+  case null
+  case unknown
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+public struct JSON {
+  public init(data: Foundation::Data, options opt: Foundation::JSONSerialization.Foundation::ReadingOptions = []) throws
+  public init(_ object: Any)
+  public init(parseJSON jsonString: Swift::String)
+  public mutating func merge(with other: StringeeWidget::JSON) throws
+  public func merged(with other: StringeeWidget::JSON) throws -> StringeeWidget::JSON
+  public var type: StringeeWidget::`Type` {
+    get
+  }
+  public var error: StringeeWidget::SwiftyJSONError? {
+    get
+  }
+  public var object: Any {
+    get
+    set
+  }
+  @available(*, unavailable, renamed: "null")
+  public static var nullJSON: StringeeWidget::JSON {
+    get
+  }
+  public static var null: StringeeWidget::JSON {
+    get
+  }
+}
+public enum Index<T> : Swift::Comparable {
+  case array(Swift::Int)
+  case dictionary(Swift::DictionaryIndex<Swift::String, T>)
+  case null
+  public static func == (lhs: StringeeWidget::Index<T>, rhs: StringeeWidget::Index<T>) -> Swift::Bool
+  public static func < (lhs: StringeeWidget::Index<T>, rhs: StringeeWidget::Index<T>) -> Swift::Bool
+}
+public typealias JSONIndex = StringeeWidget::Index<StringeeWidget::JSON>
+public typealias JSONRawIndex = StringeeWidget::Index<Any>
+extension StringeeWidget::JSON : Swift::Collection {
+  public typealias Index = StringeeWidget::JSONRawIndex
+  public var startIndex: StringeeWidget::JSON.StringeeWidget::Index {
+    get
+  }
+  public var endIndex: StringeeWidget::JSON.StringeeWidget::Index {
+    get
+  }
+  public func index(after i: StringeeWidget::JSON.StringeeWidget::Index) -> StringeeWidget::JSON.StringeeWidget::Index
+  public subscript(position: StringeeWidget::JSON.StringeeWidget::Index) -> (Swift::String, StringeeWidget::JSON) {
+    get
+  }
+  public typealias Element = (Swift::String, StringeeWidget::JSON)
+  public typealias Indices = Swift::DefaultIndices<StringeeWidget::JSON>
+  public typealias Iterator = Swift::IndexingIterator<StringeeWidget::JSON>
+  public typealias SubSequence = Swift::Slice<StringeeWidget::JSON>
+}
+public enum JSONKey {
+  case index(Swift::Int)
+  case key(Swift::String)
+}
+public protocol JSONSubscriptType {
+  var jsonKey: StringeeWidget::JSONKey { get }
+}
+extension Swift::Int : StringeeWidget::JSONSubscriptType {
+  public var jsonKey: StringeeWidget::JSONKey {
+    get
+  }
+}
+extension Swift::String : StringeeWidget::JSONSubscriptType {
+  public var jsonKey: StringeeWidget::JSONKey {
+    get
+  }
+}
+extension StringeeWidget::JSON {
+  public subscript(path: [any StringeeWidget::JSONSubscriptType]) -> StringeeWidget::JSON {
+    get
+    set
+  }
+  public subscript(path: any StringeeWidget::JSONSubscriptType...) -> StringeeWidget::JSON {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON : Swift::ExpressibleByStringLiteral {
+  public init(stringLiteral value: Swift::StringLiteralType)
+  public init(extendedGraphemeClusterLiteral value: Swift::StringLiteralType)
+  public init(unicodeScalarLiteral value: Swift::StringLiteralType)
+  public typealias ExtendedGraphemeClusterLiteralType = Swift::StringLiteralType
+  public typealias StringLiteralType = Swift::StringLiteralType
+  public typealias UnicodeScalarLiteralType = Swift::StringLiteralType
+}
+extension StringeeWidget::JSON : Swift::ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift::IntegerLiteralType)
+  public typealias IntegerLiteralType = Swift::IntegerLiteralType
+}
+extension StringeeWidget::JSON : Swift::ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift::BooleanLiteralType)
+  public typealias BooleanLiteralType = Swift::BooleanLiteralType
+}
+extension StringeeWidget::JSON : Swift::ExpressibleByFloatLiteral {
+  public init(floatLiteral value: Swift::FloatLiteralType)
+  public typealias FloatLiteralType = Swift::FloatLiteralType
+}
+extension StringeeWidget::JSON : Swift::ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift::String, Any)...)
+  public typealias Key = Swift::String
+  public typealias Value = Any
+}
+extension StringeeWidget::JSON : Swift::ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: Any...)
+  public typealias ArrayLiteralElement = Any
+}
+extension StringeeWidget::JSON : Swift::RawRepresentable {
+  public init?(rawValue: Any)
+  public var rawValue: Any {
+    get
+  }
+  public func rawData(options opt: Foundation::JSONSerialization.Foundation::WritingOptions = JSONSerialization.WritingOptions(rawValue: 0)) throws -> Foundation::Data
+  public func rawString(_ encoding: Swift::String.Foundation::Encoding = .utf8, options opt: Foundation::JSONSerialization.Foundation::WritingOptions = .prettyPrinted) -> Swift::String?
+  public func rawString(_ options: [StringeeWidget::writingOptionsKeys : Any]) -> Swift::String?
+  public typealias RawValue = Any
+}
+extension StringeeWidget::JSON : Swift::CustomStringConvertible, Swift::CustomDebugStringConvertible {
+  public var description: Swift::String {
+    get
+  }
+  public var debugDescription: Swift::String {
+    get
+  }
+}
+extension StringeeWidget::JSON {
+  public var array: [StringeeWidget::JSON]? {
+    get
+  }
+  public var arrayValue: [StringeeWidget::JSON] {
+    get
+  }
+  public var arrayObject: [Any]? {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON {
+  public var dictionary: [Swift::String : StringeeWidget::JSON]? {
+    get
+  }
+  public var dictionaryValue: [Swift::String : StringeeWidget::JSON] {
+    get
+  }
+  public var dictionaryObject: [Swift::String : Any]? {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON {
+  public var bool: Swift::Bool? {
+    get
+    set
+  }
+  public var boolValue: Swift::Bool {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON {
+  public var string: Swift::String? {
+    get
+    set
+  }
+  public var stringValue: Swift::String {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON {
+  public var number: Foundation::NSNumber? {
+    get
+    set
+  }
+  public var numberValue: Foundation::NSNumber {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON {
+  public var null: Foundation::NSNull? {
+    get
+    set
+  }
+  public func exists() -> Swift::Bool
+}
+extension StringeeWidget::JSON {
+  public var url: Foundation::URL? {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON {
+  public var double: Swift::Double? {
+    get
+    set
+  }
+  public var doubleValue: Swift::Double {
+    get
+    set
+  }
+  public var float: Swift::Float? {
+    get
+    set
+  }
+  public var floatValue: Swift::Float {
+    get
+    set
+  }
+  public var int: Swift::Int? {
+    get
+    set
+  }
+  public var intValue: Swift::Int {
+    get
+    set
+  }
+  public var uInt: Swift::UInt? {
+    get
+    set
+  }
+  public var uIntValue: Swift::UInt {
+    get
+    set
+  }
+  public var int8: Swift::Int8? {
+    get
+    set
+  }
+  public var int8Value: Swift::Int8 {
+    get
+    set
+  }
+  public var uInt8: Swift::UInt8? {
+    get
+    set
+  }
+  public var uInt8Value: Swift::UInt8 {
+    get
+    set
+  }
+  public var int16: Swift::Int16? {
+    get
+    set
+  }
+  public var int16Value: Swift::Int16 {
+    get
+    set
+  }
+  public var uInt16: Swift::UInt16? {
+    get
+    set
+  }
+  public var uInt16Value: Swift::UInt16 {
+    get
+    set
+  }
+  public var int32: Swift::Int32? {
+    get
+    set
+  }
+  public var int32Value: Swift::Int32 {
+    get
+    set
+  }
+  public var uInt32: Swift::UInt32? {
+    get
+    set
+  }
+  public var uInt32Value: Swift::UInt32 {
+    get
+    set
+  }
+  public var int64: Swift::Int64? {
+    get
+    set
+  }
+  public var int64Value: Swift::Int64 {
+    get
+    set
+  }
+  public var uInt64: Swift::UInt64? {
+    get
+    set
+  }
+  public var uInt64Value: Swift::UInt64 {
+    get
+    set
+  }
+}
+extension StringeeWidget::JSON : Swift::Comparable {
+}
+public func == (lhs: StringeeWidget::JSON, rhs: StringeeWidget::JSON) -> Swift::Bool
+public func <= (lhs: StringeeWidget::JSON, rhs: StringeeWidget::JSON) -> Swift::Bool
+public func >= (lhs: StringeeWidget::JSON, rhs: StringeeWidget::JSON) -> Swift::Bool
+public func > (lhs: StringeeWidget::JSON, rhs: StringeeWidget::JSON) -> Swift::Bool
+public func < (lhs: StringeeWidget::JSON, rhs: StringeeWidget::JSON) -> Swift::Bool
+public enum writingOptionsKeys {
+  case jsonSerialization
+  case castNilToNSNull
+  case maxObjextDepth
+  case encoding
+  public static func == (a: StringeeWidget::writingOptionsKeys, b: StringeeWidget::writingOptionsKeys) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+extension StringeeWidget::JSON : Swift::Codable {
+  public init(from decoder: any Swift::Decoder) throws
+  public func encode(to encoder: any Swift::Encoder) throws
+}
+extension StringeeWidget::EKAttributes {
+  public struct PositionConstraints {
+    public enum SafeArea {
+      case overridden
+      case empty(fillSafeArea: Swift::Bool)
+      public var isOverridden: Swift::Bool {
+        get
+      }
+    }
+    public enum Edge {
+      case ratio(value: CoreFoundation::CGFloat)
+      case offset(value: CoreFoundation::CGFloat)
+      case constant(value: CoreFoundation::CGFloat)
+      case intrinsic
+      public static var fill: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Edge {
+        get
+      }
+    }
+    public struct Size {
+      public var width: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Edge
+      public var height: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Edge
+      public init(width: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Edge, height: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Edge)
+      public static var intrinsic: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size {
+        get
+      }
+      public static var sizeToWidth: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size {
+        get
+      }
+      public static var screen: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size {
+        get
+      }
+    }
+    public enum KeyboardRelation {
+      public struct Offset {
+        public var bottom: CoreFoundation::CGFloat
+        public var screenEdgeResistance: CoreFoundation::CGFloat?
+        public init(bottom: CoreFoundation::CGFloat = 0, screenEdgeResistance: CoreFoundation::CGFloat? = nil)
+        public static var none: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::KeyboardRelation.StringeeWidget::Offset {
+          get
+        }
+      }
+      case bind(offset: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::KeyboardRelation.StringeeWidget::Offset)
+      case unbind
+      public var isBound: Swift::Bool {
+        get
+      }
+    }
+    public struct Rotation {
+      public enum SupportedInterfaceOrientation {
+        case standard
+        case all
+        public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Rotation.StringeeWidget::SupportedInterfaceOrientation, b: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Rotation.StringeeWidget::SupportedInterfaceOrientation) -> Swift::Bool
+        public func hash(into hasher: inout Swift::Hasher)
+        public var hashValue: Swift::Int {
+          get
+        }
+      }
+      public var isEnabled: Swift::Bool
+      public var supportedInterfaceOrientations: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Rotation.StringeeWidget::SupportedInterfaceOrientation
+      public init()
+    }
+    public var rotation: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Rotation
+    public var keyboardRelation: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::KeyboardRelation
+    public var size: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size
+    public var maxSize: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size
+    public var verticalOffset: CoreFoundation::CGFloat
+    public var safeArea: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::SafeArea
+    public var hasVerticalOffset: Swift::Bool {
+      get
+    }
+    public static var float: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints {
+      get
+    }
+    public static var fullWidth: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints {
+      get
+    }
+    public static var fullScreen: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints {
+      get
+    }
+    public init(verticalOffset: CoreFoundation::CGFloat = 0, size: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size = .sizeToWidth, maxSize: StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Size = .intrinsic)
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public enum PopBehavior {
+    case overridden
+    case animated(animation: StringeeWidget::EKAttributes.StringeeWidget::Animation)
+    public var isOverriden: Swift::Bool {
+      get
+    }
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public struct Animation : Swift::Equatable {
+    public struct Spring : Swift::Equatable {
+      public var damping: CoreFoundation::CGFloat
+      public var initialVelocity: CoreFoundation::CGFloat
+      public init(damping: CoreFoundation::CGFloat, initialVelocity: CoreFoundation::CGFloat)
+      public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Spring, b: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Spring) -> Swift::Bool
+    }
+    public struct RangeAnimation : Swift::Equatable {
+      public var duration: Foundation::TimeInterval
+      public var delay: Foundation::TimeInterval
+      public var start: CoreFoundation::CGFloat
+      public var end: CoreFoundation::CGFloat
+      public var spring: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Spring?
+      public init(from start: CoreFoundation::CGFloat, to end: CoreFoundation::CGFloat, duration: Foundation::TimeInterval, delay: Foundation::TimeInterval = 0, spring: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Spring? = nil)
+      public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::RangeAnimation, b: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::RangeAnimation) -> Swift::Bool
+    }
+    public struct Translate : Swift::Equatable {
+      public enum AnchorPosition : Swift::Equatable {
+        case top
+        case bottom
+        case automatic
+        public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate.StringeeWidget::AnchorPosition, b: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate.StringeeWidget::AnchorPosition) -> Swift::Bool
+        public func hash(into hasher: inout Swift::Hasher)
+        public var hashValue: Swift::Int {
+          get
+        }
+      }
+      public var duration: Foundation::TimeInterval
+      public var delay: Foundation::TimeInterval
+      public var anchorPosition: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate.StringeeWidget::AnchorPosition
+      public var spring: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Spring?
+      public init(duration: Foundation::TimeInterval, anchorPosition: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate.StringeeWidget::AnchorPosition = .automatic, delay: Foundation::TimeInterval = 0, spring: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Spring? = nil)
+      public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate, b: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate) -> Swift::Bool
+    }
+    public var translate: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate?
+    public var scale: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::RangeAnimation?
+    public var fade: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::RangeAnimation?
+    public var containsTranslation: Swift::Bool {
+      get
+    }
+    public var containsScale: Swift::Bool {
+      get
+    }
+    public var containsFade: Swift::Bool {
+      get
+    }
+    public var containsAnimation: Swift::Bool {
+      get
+    }
+    public var maxDelay: Foundation::TimeInterval {
+      get
+    }
+    public var maxDuration: Foundation::TimeInterval {
+      get
+    }
+    public var totalDuration: Foundation::TimeInterval {
+      get
+    }
+    public static var translation: StringeeWidget::EKAttributes.StringeeWidget::Animation {
+      get
+    }
+    public static var none: StringeeWidget::EKAttributes.StringeeWidget::Animation {
+      get
+    }
+    public init(translate: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate? = nil, scale: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::RangeAnimation? = nil, fade: StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::RangeAnimation? = nil)
+    public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Animation, b: StringeeWidget::EKAttributes.StringeeWidget::Animation) -> Swift::Bool
+  }
+}
+@objc @_Concurrency::MainActor @preconcurrency public class EKXStatusBarMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public init(leading: StringeeWidget::EKProperty.StringeeWidget::LabelContent, trailing: StringeeWidget::EKProperty.StringeeWidget::LabelContent)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @objc deinit
+}
+@objc @_Concurrency::MainActor @preconcurrency public class EKImageNoteMessageView : StringeeWidget::EKAccessoryNoteMessageView {
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency public init(with content: StringeeWidget::EKProperty.StringeeWidget::LabelContent, imageContent: StringeeWidget::EKProperty.StringeeWidget::ImageContent)
+  @objc deinit
+}
+@objc public protocol StringeeWidgetDelegate {
+  @objc func onConnectionConnected(userId: Swift::String, isReconnecting: Swift::Bool)
+  @objc func onConnectionDisconnected(isReconnecting: Swift::Bool)
+  @objc func onConnectionError(code: Swift::Int, message: Swift::String)
+  @objc func onRequestNewToken()
+  @objc func onDisplayCallingViewController(vc: UIKit::UIViewController)
+  @objc func onSignalingState(state: Stringee::SignalingState)
+  @objc optional func onCallError(_ error: StringeeWidget::StringeeWidgetError)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class StringeeWidget : ObjectiveC::NSObject {
+  @objc public static let instance: StringeeWidget::StringeeWidget
+  @objc weak public var delegate: (any StringeeWidget::StringeeWidgetDelegate)?
+  @objc public var autoShowPopup: Swift::Bool
+  @objc weak public var viewToShowPopup: UIKit::UIView?
+  @objc public var autoShowError: Swift::Bool
+  @objc public var errorTexts: StringeeWidget::StringeeErrorTextConfig
+  @objc public var errorAppearance: StringeeWidget::StringeeErrorViewAppearance
+  @objc public var stringeeClient: Stringee::StringeeClient
+  @objc public func setHost(addresses: [StringeeWidget::StringeeWidgetServerAddress])
+  @objc public func connect(token: Swift::String)
+  @objc public func disconnect()
+  @objc public func makeCall(config: StringeeWidget::StringeeCallConfig, completion: @escaping (Swift::Bool, Swift::Int, Swift::String, Swift::String?) -> Swift::Void)
+  @objc public func makeCall(token: Swift::String, config: StringeeWidget::StringeeCallConfig, completion: @escaping (Swift::Bool, Swift::Int, Swift::String, Swift::String?) -> Swift::Void)
+  @objc public func finalized(completion: ((Swift::Bool, Swift::Int, Swift::String) -> Swift::Void)? = nil)
+  @objc public func voipRegistration(delegate: (any PushKit::PKPushRegistryDelegate)? = nil)
+  @objc public func didUpdate(pushCredentials: PushKit::PKPushCredentials, for type: PushKit::PKPushType)
+  @objc public func didReceiveIncomingPushWith(payload: PushKit::PKPushPayload, for type: PushKit::PKPushType, completion: @escaping () -> Swift::Void)
+  @objc deinit
+}
+extension StringeeWidget::StringeeWidget : PushKit::PKPushRegistryDelegate {
+  @objc dynamic public func pushRegistry(_ registry: PushKit::PKPushRegistry, didUpdate pushCredentials: PushKit::PKPushCredentials, for type: PushKit::PKPushType)
+  @objc dynamic public func pushRegistry(_ registry: PushKit::PKPushRegistry, didReceiveIncomingPushWith payload: PushKit::PKPushPayload, for type: PushKit::PKPushType, completion: @escaping () -> Swift::Void)
+}
+@objc @_Concurrency::MainActor @preconcurrency final public class EKFormMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public init(with title: StringeeWidget::EKProperty.StringeeWidget::LabelContent, textFieldsContent: [StringeeWidget::EKProperty.StringeeWidget::TextFieldContent], buttonContent: StringeeWidget::EKProperty.StringeeWidget::ButtonContent)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency final public func becomeFirstResponder(with textFieldIndex: Swift::Int)
+  @_Concurrency::MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency public class RoundProgressView : UIKit::UIView, StringeeWidget::Progressive {
+  @_Concurrency::MainActor @preconcurrency public var isAnnular: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var progress: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var progressTintColor: UIKit::UIColor {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var backgroundTintColor: UIKit::UIColor {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency @objc convenience dynamic public init()
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation::CGSize {
+    @objc get
+  }
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func draw(_ rect: CoreFoundation::CGRect)
+  @objc deinit
+}
+@objc @_Concurrency::MainActor @preconcurrency final public class EKRatingMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public init(with message: StringeeWidget::EKRatingMessage)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @objc deinit
+}
+extension StringeeWidget::EKAttributes {
+  public enum StatusBar {
+    public typealias Appearance = (visible: Swift::Bool, style: UIKit::UIStatusBarStyle)
+    case ignored
+    case hidden
+    case dark
+    case light
+    case inferred
+    public var appearance: StringeeWidget::EKAttributes.StringeeWidget::StatusBar.StringeeWidget::Appearance {
+      get
+    }
+    public static func statusBar(by appearance: StringeeWidget::EKAttributes.StringeeWidget::StatusBar.StringeeWidget::Appearance) -> StringeeWidget::EKAttributes.StringeeWidget::StatusBar
+    public static var currentAppearance: StringeeWidget::EKAttributes.StringeeWidget::StatusBar.StringeeWidget::Appearance {
+      get
+    }
+    public static var currentStatusBar: StringeeWidget::EKAttributes.StringeeWidget::StatusBar {
+      get
+    }
+    public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::StatusBar, b: StringeeWidget::EKAttributes.StringeeWidget::StatusBar) -> Swift::Bool
+    public func hash(into hasher: inout Swift::Hasher)
+    public var hashValue: Swift::Int {
+      get
+    }
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public enum Shadow {
+    case none
+    case active(with: StringeeWidget::EKAttributes.StringeeWidget::Shadow.StringeeWidget::Value)
+    public struct Value {
+      public let radius: CoreFoundation::CGFloat
+      public let opacity: Swift::Float
+      public let color: StringeeWidget::EKColor
+      public let offset: CoreFoundation::CGSize
+      public init(color: StringeeWidget::EKColor = .black, opacity: Swift::Float, radius: CoreFoundation::CGFloat, offset: CoreFoundation::CGSize = .zero)
+    }
+  }
+}
+public typealias QLAttribute = UIKit::NSLayoutConstraint.UIKit::Attribute
+public typealias QLRelation = UIKit::NSLayoutConstraint.UIKit::Relation
+public typealias QLView = UIKit::UIView
+public typealias QLPriority = UIKit::UILayoutPriority
+extension StringeeWidget::EKAttributes {
+  public enum Precedence {
+    public struct Priority : Swift::Hashable, Swift::Equatable, Swift::RawRepresentable, Swift::Comparable {
+      public var rawValue: Swift::Int
+      public var hashValue: Swift::Int {
+        get
+      }
+      public init(_ rawValue: Swift::Int)
+      public init(rawValue: Swift::Int)
+      public static func == (lhs: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority, rhs: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority) -> Swift::Bool
+      public static func < (lhs: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority, rhs: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority) -> Swift::Bool
+      public typealias RawValue = Swift::Int
+    }
+    public enum QueueingHeuristic {
+      public static var value: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::QueueingHeuristic
+      case chronological
+      case priority
+      public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::QueueingHeuristic, b: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::QueueingHeuristic) -> Swift::Bool
+      public func hash(into hasher: inout Swift::Hasher)
+      public var hashValue: Swift::Int {
+        get
+      }
+    }
+    case override(priority: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority, dropEnqueuedEntries: Swift::Bool)
+    case enqueue(priority: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority)
+    public var priority: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority {
+      get
+      set
+    }
+  }
+}
+extension StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority {
+  public static let maxRawValue: Swift::Int
+  public static let highRawValue: Swift::Int
+  public static let normalRawValue: Swift::Int
+  public static let lowRawValue: Swift::Int
+  public static let minRawValue: Swift::Int
+  public static let max: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority
+  public static let high: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority
+  public static let normal: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority
+  public static let low: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority
+  public static let min: StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::Priority
+}
+public typealias QLMultipleConstraints = [StringeeWidget::QLAttribute : UIKit::NSLayoutConstraint]
+extension UIKit::UILayoutPriority {
+  public static let must: StringeeWidget::QLPriority
+  public static let zero: StringeeWidget::QLPriority
+}
+public struct QLAttributePair {
+  public let first: StringeeWidget::QLAttribute
+  public let second: StringeeWidget::QLAttribute
+}
+public struct QLSizeConstraints {
+  public let width: UIKit::NSLayoutConstraint
+  public let height: UIKit::NSLayoutConstraint
+}
+public struct QLCenterConstraints {
+  public let x: UIKit::NSLayoutConstraint
+  public let y: UIKit::NSLayoutConstraint
+}
+public struct QLAxisConstraints {
+  public let first: UIKit::NSLayoutConstraint
+  public let second: UIKit::NSLayoutConstraint
+}
+public struct QLFillConstraints {
+  public let center: StringeeWidget::QLCenterConstraints
+  public let size: StringeeWidget::QLSizeConstraints
+}
+public struct QLPriorityPair {
+  public let horizontal: StringeeWidget::QLPriority
+  public let vertical: StringeeWidget::QLPriority
+  public static var required: StringeeWidget::QLPriorityPair {
+    get
+  }
+  public static var must: StringeeWidget::QLPriorityPair {
+    get
+  }
+  public init(_ horizontal: StringeeWidget::QLPriority, _ vertical: StringeeWidget::QLPriority)
+}
+public enum QLAxis {
+  case horizontally
+  case vertically
+  public var attributes: StringeeWidget::QLAttributePair {
+    get
+  }
+  public static func == (a: StringeeWidget::QLAxis, b: StringeeWidget::QLAxis) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public enum BackgroundStyle : Swift::Equatable {
+    public struct BlurStyle : Swift::Equatable {
+      public static var extra: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle {
+        get
+      }
+      public static var standard: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle {
+        get
+      }
+      @available(iOS 10.0, *)
+      public static var prominent: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle {
+        get
+      }
+      public static var dark: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle {
+        get
+      }
+      public init(style: UIKit::UIBlurEffect.UIKit::Style)
+      public init(light: UIKit::UIBlurEffect.UIKit::Style, dark: UIKit::UIBlurEffect.UIKit::Style)
+      public func blurStyle(for traits: UIKit::UITraitCollection, mode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode) -> UIKit::UIBlurEffect.UIKit::Style
+      public func blurEffect(for traits: UIKit::UITraitCollection, mode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode) -> UIKit::UIBlurEffect
+      public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle, b: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle) -> Swift::Bool
+    }
+    public struct Gradient {
+      public var colors: [StringeeWidget::EKColor]
+      public var startPoint: CoreFoundation::CGPoint
+      public var endPoint: CoreFoundation::CGPoint
+      public init(colors: [StringeeWidget::EKColor], startPoint: CoreFoundation::CGPoint, endPoint: CoreFoundation::CGPoint)
+    }
+    case visualEffect(style: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::BlurStyle)
+    case color(color: StringeeWidget::EKColor)
+    case gradient(gradient: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle.StringeeWidget::Gradient)
+    case image(image: UIKit::UIImage)
+    case clear
+    public static func == (lhs: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle, rhs: StringeeWidget::EKAttributes.StringeeWidget::BackgroundStyle) -> Swift::Bool
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public enum Scroll {
+    public struct PullbackAnimation {
+      public var duration: Foundation::TimeInterval
+      public var damping: CoreFoundation::CGFloat
+      public var initialSpringVelocity: CoreFoundation::CGFloat
+      public init(duration: Foundation::TimeInterval, damping: CoreFoundation::CGFloat, initialSpringVelocity: CoreFoundation::CGFloat)
+      public static var jolt: StringeeWidget::EKAttributes.StringeeWidget::Scroll.StringeeWidget::PullbackAnimation {
+        get
+      }
+      public static var easeOut: StringeeWidget::EKAttributes.StringeeWidget::Scroll.StringeeWidget::PullbackAnimation {
+        get
+      }
+    }
+    case disabled
+    case edgeCrossingDisabled(swipeable: Swift::Bool)
+    case enabled(swipeable: Swift::Bool, pullbackAnimation: StringeeWidget::EKAttributes.StringeeWidget::Scroll.StringeeWidget::PullbackAnimation)
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public enum RoundCorners {
+    case none
+    case all(radius: CoreFoundation::CGFloat)
+    case top(radius: CoreFoundation::CGFloat)
+    case bottom(radius: CoreFoundation::CGFloat)
+  }
+  public enum Border {
+    case none
+    case value(color: UIKit::UIColor, width: CoreFoundation::CGFloat)
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency public class RoundedButton : UIKit::UIButton {
+  @_Concurrency::MainActor @preconcurrency public var roundedCorners: StringeeWidget::RoundedCorners
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation::CGSize {
+    @objc get
+  }
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func setTitleColor(_ color: UIKit::UIColor?, for state: UIKit::UIControl.UIKit::State)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public var isHighlighted: Swift::Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency public class EKAccessoryNoteMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation::NSCoder)
+  @objc deinit
+}
+@objc public enum StringeeVideoResolution : Swift::Int {
+  case normal = 0
+  case hd = 1
+  case full_hd = 2
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+public protocol HUDDelegate : AnyObject {
+  func hudWasHidden(_ hud: StringeeWidget::HUD)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency open class HUD : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency weak public var delegate: (any StringeeWidget::HUDDelegate)?
+  @_Concurrency::MainActor @preconcurrency public var completionBlock: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public var graceTime: Swift::Double
+  @_Concurrency::MainActor @preconcurrency public var minShowTime: Swift::Double
+  @_Concurrency::MainActor @preconcurrency public var removeFromSuperViewOnHide: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var mode: StringeeWidget::HUDMode {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var contentColor: UIKit::UIColor {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var animationType: StringeeWidget::HUDAnimation
+  @_Concurrency::MainActor @preconcurrency public var offset: CoreFoundation::CGPoint {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public static let maxOffset: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var margin: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var topBottomMargin: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var minSize: CoreFoundation::CGSize {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var isSquare: Swift::Bool {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var isMotionEffectsEnabled: Swift::Bool {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var progress: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var progressObject: Foundation::Progress? {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var bezelView: StringeeWidget::BackgroundView {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var backgroundView: StringeeWidget::BackgroundView {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var customView: UIKit::UIView? {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var label: UIKit::UILabel {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var detailsLabel: UIKit::UILabel {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var button: StringeeWidget::RoundedButton {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency convenience public init(with view: UIKit::UIView)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @objc deinit
+}
+extension StringeeWidget::HUD {
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public class func show(to view: UIKit::UIView, animated: Swift::Bool) -> StringeeWidget::HUD
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public class func hide(for view: UIKit::UIView, animated: Swift::Bool) -> Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public class func hud(for view: UIKit::UIView) -> StringeeWidget::HUD?
+  @_Concurrency::MainActor @preconcurrency public func show(animated: Swift::Bool)
+  @_Concurrency::MainActor @preconcurrency public func hide(animated: Swift::Bool)
+  @_Concurrency::MainActor @preconcurrency public func hide(animated: Swift::Bool, afterDelay delay: Foundation::TimeInterval)
+}
+extension StringeeWidget::HUD {
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic open func didMoveToSuperview()
+}
+extension StringeeWidget::HUD {
+  @_Concurrency::MainActor @preconcurrency open func commonInit()
+}
+extension StringeeWidget::HUD {
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic open func updateConstraints()
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic open func layoutSubviews()
+}
+public struct EKSimpleMessage {
+  public let image: StringeeWidget::EKProperty.StringeeWidget::ImageContent?
+  public let title: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+  public let description: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+  public init(image: StringeeWidget::EKProperty.StringeeWidget::ImageContent? = nil, title: StringeeWidget::EKProperty.StringeeWidget::LabelContent, description: StringeeWidget::EKProperty.StringeeWidget::LabelContent)
+}
+public struct EKPopUpMessage {
+  public typealias EKPopUpMessageAction = () -> ()
+  public struct ThemeImage {
+    public enum Position {
+      case topToTop(offset: CoreFoundation::CGFloat)
+      case centerToTop(offset: CoreFoundation::CGFloat)
+    }
+    public var image: StringeeWidget::EKProperty.StringeeWidget::ImageContent
+    public var position: StringeeWidget::EKPopUpMessage.StringeeWidget::ThemeImage.StringeeWidget::Position
+    public init(image: StringeeWidget::EKProperty.StringeeWidget::ImageContent, position: StringeeWidget::EKPopUpMessage.StringeeWidget::ThemeImage.StringeeWidget::Position = .topToTop(offset: 40))
+  }
+  public var themeImage: StringeeWidget::EKPopUpMessage.StringeeWidget::ThemeImage?
+  public var title: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+  public var description: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+  public var button: StringeeWidget::EKProperty.StringeeWidget::ButtonContent
+  public var action: StringeeWidget::EKPopUpMessage.StringeeWidget::EKPopUpMessageAction
+  public init(themeImage: StringeeWidget::EKPopUpMessage.StringeeWidget::ThemeImage? = nil, title: StringeeWidget::EKProperty.StringeeWidget::LabelContent, description: StringeeWidget::EKProperty.StringeeWidget::LabelContent, button: StringeeWidget::EKProperty.StringeeWidget::ButtonContent, action: @escaping StringeeWidget::EKPopUpMessage.StringeeWidget::EKPopUpMessageAction)
+}
+@objc @_Concurrency::MainActor @preconcurrency public class EKNoteMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public var horizontalOffset: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var verticalOffset: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public init(with content: StringeeWidget::EKProperty.StringeeWidget::LabelContent)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency::MainActor @preconcurrency final public class EKNotificationMessageView : StringeeWidget::EKSimpleMessageView {
+  @_Concurrency::MainActor @preconcurrency public init(with message: StringeeWidget::EKNotificationMessage)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+public struct EKColor : Swift::Equatable {
+  public var dark: UIKit::UIColor {
+    get
+  }
+  public var light: UIKit::UIColor {
+    get
+  }
+  public init(light: UIKit::UIColor, dark: UIKit::UIColor)
+  public init(_ unified: UIKit::UIColor)
+  public init(rgb: Swift::Int)
+  public init(red: Swift::Int, green: Swift::Int, blue: Swift::Int)
+  public func color(for traits: UIKit::UITraitCollection, mode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode) -> UIKit::UIColor
+  public static func == (a: StringeeWidget::EKColor, b: StringeeWidget::EKColor) -> Swift::Bool
+}
+extension StringeeWidget::EKColor {
+  public var inverted: StringeeWidget::EKColor {
+    get
+  }
+  public func with(alpha: CoreFoundation::CGFloat) -> StringeeWidget::EKColor
+  public static var white: StringeeWidget::EKColor {
+    get
+  }
+  public static var black: StringeeWidget::EKColor {
+    get
+  }
+  public static var clear: StringeeWidget::EKColor {
+    get
+  }
+  public static var standardBackground: StringeeWidget::EKColor {
+    get
+  }
+  public static var standardContent: StringeeWidget::EKColor {
+    get
+  }
+}
+@objc @_Concurrency::MainActor @preconcurrency public class EKProcessingNoteMessageView : StringeeWidget::EKAccessoryNoteMessageView {
+  @_Concurrency::MainActor @preconcurrency public var isProcessing: Swift::Bool {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency public init(with content: StringeeWidget::EKProperty.StringeeWidget::LabelContent, activityIndicator: UIKit::UIActivityIndicatorView.UIKit::Style)
+  @objc deinit
+}
+extension StringeeWidget::EKAttributes {
+  public static var `default`: StringeeWidget::EKAttributes
+  public static var toast: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var float: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var topFloat: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var bottomFloat: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var centerFloat: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var bottomToast: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var topToast: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var topNote: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var bottomNote: StringeeWidget::EKAttributes {
+    get
+  }
+  public static var statusBar: StringeeWidget::EKAttributes {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class StringeeCallConfig : ObjectiveC::NSObject {
+  @objc public var from: Swift::String
+  @objc public var to: Swift::String
+  @objc public var toAlias: Swift::String
+  @objc public var customData: Swift::String?
+  @objc public var isVideoCall: Swift::Bool
+  @objc public var resolution: StringeeWidget::StringeeVideoResolution
+  @objc public var cameraMode: StringeeWidget::StringeeCameraFacing
+  public var scanViewConfig: StringeeWidget::StringeeScanViewConfig?
+  @objc public func setOvalConfig(_ config: StringeeWidget::OvalConfig)
+  @objc public func setRectangleConfig(_ config: StringeeWidget::RectangleConfig)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum StringeeScanViewConfig {
+  case rectangle(StringeeWidget::RectangleConfig)
+  case oval(StringeeWidget::OvalConfig)
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class OvalConfig : ObjectiveC::NSObject {
+  @objc public var boderColor: UIKit::UIColor
+  @objc public var overlayColor: UIKit::UIColor
+  @objc public var widthRatio: CoreFoundation::CGFloat
+  @objc public var aspectRatio: CoreFoundation::CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class RectangleConfig : ObjectiveC::NSObject {
+  @objc public var widthRatio: CoreFoundation::CGFloat
+  @objc public var aspectRatio: CoreFoundation::CGFloat
+  @objc public var color: UIKit::UIColor
+  @objc public var radius: CoreFoundation::CGFloat
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum StringeeCameraFacing : Swift::Int {
+  case front = 0
+  case back = 1
+  case both = 2
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class StringeeErrorViewAppearance : ObjectiveC::NSObject {
+  @objc public var backgroundColor: UIKit::UIColor
+  @objc public var textColor: UIKit::UIColor
+  @objc public var font: UIKit::UIFont
+  @objc public var iconTintColor: UIKit::UIColor?
+  @objc public var icon: UIKit::UIImage?
+  @objc public var cornerRadius: CoreFoundation::CGFloat
+  @objc public var contentInsets: UIKit::UIEdgeInsets
+  @objc public var horizontalMargin: CoreFoundation::CGFloat
+  @objc public var maxWidth: CoreFoundation::CGFloat
+  @objc public var animationDuration: Swift::Double
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class StringeeErrorTextConfig : ObjectiveC::NSObject {
+  @objc public func set(_ text: Swift::String, for code: StringeeWidget::StringeeWidgetErrorCode)
+  @objc public func reset()
+  @objc public func text(for code: StringeeWidget::StringeeWidgetErrorCode) -> Swift::String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum StringeeErrorDomain : Swift::Int {
+  case widget
+  case sdk
+  case server
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+@objc public enum StringeeWidgetErrorCode : Swift::Int {
+  case unknown = -1000
+  case tokenEmpty = -1001
+  case delegateMissing = -1002
+  case permissionDenied = -1003
+  case callTimeout = -1004
+  case callObjectMissing = -1005
+  case userCancelled = -1006
+  case clientNotConnected = -2001
+  case callIdInvalid = -2002
+  case makeCallGeneric = -2003
+  case reachPlanLimit = 20
+  case cpsLimitExceeded = 22
+  case orderCallRateLimitExceeded = 23
+  case notEnoughMoney = -3001
+  case maxConnectTime = -3002
+  case userBusy = -3003
+  case userCancel = -3004
+  case userTemporarilyUnavailable = -3005
+  case canNotMakeCall = -3006
+  case timeoutMakeCall = -3007
+  case timeoutAnswer = -3008
+  case userMakeAnotherCall = -3009
+  case restApiStop = -3010
+  case clientDisconnected = -3011
+  case callNotExistInServer = -3012
+  case handledOnAnotherDevice = -3013
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+@objc @objcMembers public class StringeeWidgetError : ObjectiveC::NSObject {
+  @objc final public let code: StringeeWidget::StringeeWidgetErrorCode
+  @objc final public let domain: StringeeWidget::StringeeErrorDomain
+  @objc final public let message: Swift::String
+  @objc final public let serverCode: Swift::Int
+  @objc final public let serverMessage: Swift::String?
+  @objc final public let endCallCause: Swift::String?
+  @objc final public let sipCode: Swift::Int
+  @objc final public let sipReason: Swift::String?
+  @objc final public let callId: Swift::String?
+  @objc public var isRetryable: Swift::Bool {
+    @objc get
+  }
+  @objc public init(code: StringeeWidget::StringeeWidgetErrorCode, domain: StringeeWidget::StringeeErrorDomain, message: Swift::String, serverCode: Swift::Int = 0, serverMessage: Swift::String? = nil, endCallCause: Swift::String? = nil, sipCode: Swift::Int = -1, sipReason: Swift::String? = nil, callId: Swift::String? = nil)
+  @objc override dynamic public var description: Swift::String {
+    @objc get
+  }
+  @objc deinit
+}
+extension UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public func forceContentWrap(_ axes: StringeeWidget::QLAxis...)
+  @_Concurrency::MainActor @preconcurrency public func forceContentWrap()
+  @_Concurrency::MainActor @preconcurrency public var verticalHuggingPriority: StringeeWidget::QLPriority {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var horizontalHuggingPriority: StringeeWidget::QLPriority {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var contentHuggingPriority: StringeeWidget::QLPriorityPair {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var verticalCompressionResistancePriority: StringeeWidget::QLPriority {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var horizontalCompressionResistancePriority: StringeeWidget::QLPriority {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var contentCompressionResistancePriority: StringeeWidget::QLPriorityPair {
+    get
+    set
+  }
+}
+public protocol Progressive : AnyObject {
+  var progress: CoreFoundation::CGFloat { get set }
+}
+extension StringeeWidget::EKAttributes {
+  public enum NotificationHapticFeedback {
+    case success
+    case warning
+    case error
+    case none
+    public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::NotificationHapticFeedback, b: StringeeWidget::EKAttributes.StringeeWidget::NotificationHapticFeedback) -> Swift::Bool
+    public func hash(into hasher: inout Swift::Hasher)
+    public var hashValue: Swift::Int {
+      get
+    }
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency final public class EKRatingSymbolsContainerView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency final public func setup(with message: StringeeWidget::EKRatingMessage, externalSelection: @escaping StringeeWidget::EKRatingMessage.StringeeWidget::Selection)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation::NSCoder)
+  @objc deinit
+}
+public enum HUDMode {
+  case indeterminate
+  case determinate
+  case determinateHorizontalBar
+  case annularDeterminate
+  case customView
+  case text
+  public static func == (a: StringeeWidget::HUDMode, b: StringeeWidget::HUDMode) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+public enum HUDAnimation {
+  case fade
+  case zoom
+  case zoomOut
+  case zoomIn
+  public static func == (a: StringeeWidget::HUDAnimation, b: StringeeWidget::HUDAnimation) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+public enum HUDBackgroundStyle {
+  case solidColor
+  case blur
+  public static func == (a: StringeeWidget::HUDBackgroundStyle, b: StringeeWidget::HUDBackgroundStyle) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+public enum RoundedCorners {
+  case radius(CoreFoundation::CGFloat)
+  case fully
+}
+extension StringeeWidget::EKAttributes {
+  public enum Position {
+    case top
+    case bottom
+    case center
+    public var isTop: Swift::Bool {
+      get
+    }
+    public var isCenter: Swift::Bool {
+      get
+    }
+    public var isBottom: Swift::Bool {
+      get
+    }
+    public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::Position, b: StringeeWidget::EKAttributes.StringeeWidget::Position) -> Swift::Bool
+    public func hash(into hasher: inout Swift::Hasher)
+    public var hashValue: Swift::Int {
+      get
+    }
+  }
+}
+public struct EKAlertMessage {
+  public enum ImagePosition {
+    case top
+    case left
+    public static func == (a: StringeeWidget::EKAlertMessage.StringeeWidget::ImagePosition, b: StringeeWidget::EKAlertMessage.StringeeWidget::ImagePosition) -> Swift::Bool
+    public func hash(into hasher: inout Swift::Hasher)
+    public var hashValue: Swift::Int {
+      get
+    }
+  }
+  public let imagePosition: StringeeWidget::EKAlertMessage.StringeeWidget::ImagePosition
+  public let simpleMessage: StringeeWidget::EKSimpleMessage
+  public let buttonBarContent: StringeeWidget::EKProperty.StringeeWidget::ButtonBarContent
+  public init(simpleMessage: StringeeWidget::EKSimpleMessage, imagePosition: StringeeWidget::EKAlertMessage.StringeeWidget::ImagePosition = .top, buttonBarContent: StringeeWidget::EKProperty.StringeeWidget::ButtonBarContent)
+}
+@objc @_Concurrency::MainActor @preconcurrency final public class EKButtonBarView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency public init(with buttonBarContent: StringeeWidget::EKProperty.StringeeWidget::ButtonBarContent)
+  @_Concurrency::MainActor @preconcurrency @objc override final public func layoutSubviews()
+  @_Concurrency::MainActor @preconcurrency final public func expand()
+  @_Concurrency::MainActor @preconcurrency final public func compress()
+  @_Concurrency::MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+public struct EKNotificationMessage {
+  public struct Insets {
+    public var contentInsets: UIKit::UIEdgeInsets
+    public var titleToDescription: CoreFoundation::CGFloat
+    public static var `default`: StringeeWidget::EKNotificationMessage.StringeeWidget::Insets
+  }
+  public let simpleMessage: StringeeWidget::EKSimpleMessage
+  public let auxiliary: StringeeWidget::EKProperty.StringeeWidget::LabelContent?
+  public let insets: StringeeWidget::EKNotificationMessage.StringeeWidget::Insets
+  public init(simpleMessage: StringeeWidget::EKSimpleMessage, auxiliary: StringeeWidget::EKProperty.StringeeWidget::LabelContent? = nil, insets: StringeeWidget::EKNotificationMessage.StringeeWidget::Insets = .default)
+}
+@objc @_Concurrency::MainActor @preconcurrency final public class EKTextField : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency final public var text: Swift::String {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public init(with content: StringeeWidget::EKProperty.StringeeWidget::TextFieldContent)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency final public func makeFirstResponder()
+  @_Concurrency::MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+public struct EKProperty {
+  public struct ButtonContent {
+    public typealias Action = () -> ()
+    public var label: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+    public var backgroundColor: StringeeWidget::EKColor
+    public var highlightedBackgroundColor: StringeeWidget::EKColor
+    public var contentEdgeInset: CoreFoundation::CGFloat
+    public var displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode
+    public var accessibilityIdentifier: Swift::String?
+    public var action: StringeeWidget::EKProperty.StringeeWidget::ButtonContent.StringeeWidget::Action?
+    public init(label: StringeeWidget::EKProperty.StringeeWidget::LabelContent, backgroundColor: StringeeWidget::EKColor, highlightedBackgroundColor: StringeeWidget::EKColor, contentEdgeInset: CoreFoundation::CGFloat = 5, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, accessibilityIdentifier: Swift::String? = nil, action: @escaping StringeeWidget::EKProperty.StringeeWidget::ButtonContent.StringeeWidget::Action = {})
+    public func backgroundColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor
+    public func highlightedBackgroundColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor
+    public func highlighedLabelColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor
+  }
+  public struct LabelContent {
+    public var text: Swift::String
+    public var style: StringeeWidget::EKProperty.StringeeWidget::LabelStyle
+    public var accessibilityIdentifier: Swift::String?
+    public init(text: Swift::String, style: StringeeWidget::EKProperty.StringeeWidget::LabelStyle, accessibilityIdentifier: Swift::String? = nil)
+  }
+  public struct LabelStyle {
+    public var font: UIKit::UIFont
+    public var color: StringeeWidget::EKColor
+    public var alignment: UIKit::NSTextAlignment
+    public var numberOfLines: Swift::Int
+    public var displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode
+    public init(font: UIKit::UIFont, color: StringeeWidget::EKColor, alignment: UIKit::NSTextAlignment = .left, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, numberOfLines: Swift::Int = 0)
+    public func color(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor
+  }
+  public struct ImageContent {
+    public enum TransformAnimation {
+      case animate(duration: Foundation::TimeInterval, options: UIKit::UIView.UIKit::AnimationOptions, transform: CoreFoundation::CGAffineTransform)
+      case none
+    }
+    public var tint: StringeeWidget::EKColor?
+    public var images: [UIKit::UIImage]
+    public var imageSequenceAnimationDuration: Foundation::TimeInterval
+    public var size: CoreFoundation::CGSize?
+    public var contentMode: UIKit::UIView.UIKit::ContentMode
+    public var makesRound: Swift::Bool
+    public var animation: StringeeWidget::EKProperty.StringeeWidget::ImageContent.StringeeWidget::TransformAnimation
+    public var displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode
+    public var accessibilityIdentifier: Swift::String?
+    public init(imageName: Swift::String, animation: StringeeWidget::EKProperty.StringeeWidget::ImageContent.StringeeWidget::TransformAnimation = .none, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, size: CoreFoundation::CGSize? = nil, contentMode: UIKit::UIView.UIKit::ContentMode = .scaleToFill, tint: StringeeWidget::EKColor? = nil, makesRound: Swift::Bool = false, accessibilityIdentifier: Swift::String? = nil)
+    public init(image: UIKit::UIImage, animation: StringeeWidget::EKProperty.StringeeWidget::ImageContent.StringeeWidget::TransformAnimation = .none, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, size: CoreFoundation::CGSize? = nil, tint: StringeeWidget::EKColor? = nil, contentMode: UIKit::UIView.UIKit::ContentMode = .scaleToFill, makesRound: Swift::Bool = false, accessibilityIdentifier: Swift::String? = nil)
+    public init(images: [UIKit::UIImage], imageSequenceAnimationDuration: Foundation::TimeInterval = 1, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, animation: StringeeWidget::EKProperty.StringeeWidget::ImageContent.StringeeWidget::TransformAnimation = .none, size: CoreFoundation::CGSize? = nil, tint: StringeeWidget::EKColor? = nil, contentMode: UIKit::UIView.UIKit::ContentMode = .scaleToFill, makesRound: Swift::Bool = false, accessibilityIdentifier: Swift::String? = nil)
+    public init(imagesNames: [Swift::String], imageSequenceAnimationDuration: Foundation::TimeInterval = 1, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, animation: StringeeWidget::EKProperty.StringeeWidget::ImageContent.StringeeWidget::TransformAnimation = .none, size: CoreFoundation::CGSize? = nil, tint: StringeeWidget::EKColor? = nil, contentMode: UIKit::UIView.UIKit::ContentMode = .scaleToFill, makesRound: Swift::Bool = false, accessibilityIdentifier: Swift::String? = nil)
+    public static func thumb(with image: UIKit::UIImage, edgeSize: CoreFoundation::CGFloat) -> StringeeWidget::EKProperty.StringeeWidget::ImageContent
+    public static func thumb(with imageName: Swift::String, edgeSize: CoreFoundation::CGFloat) -> StringeeWidget::EKProperty.StringeeWidget::ImageContent
+    public func tintColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor?
+  }
+  public struct TextFieldContent {
+    weak public var delegate: (any UIKit::UITextFieldDelegate)?
+    public var keyboardType: UIKit::UIKeyboardType
+    public var isSecure: Swift::Bool
+    public var leadingImage: UIKit::UIImage!
+    public var placeholder: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+    public var textStyle: StringeeWidget::EKProperty.StringeeWidget::LabelStyle
+    public var tintColor: StringeeWidget::EKColor!
+    public var displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode
+    public var bottomBorderColor: StringeeWidget::EKColor
+    public var accessibilityIdentifier: Swift::String?
+    public var textContent: Swift::String {
+      get
+      set
+    }
+    public init(delegate: (any UIKit::UITextFieldDelegate)? = nil, keyboardType: UIKit::UIKeyboardType = .default, placeholder: StringeeWidget::EKProperty.StringeeWidget::LabelContent, tintColor: StringeeWidget::EKColor? = nil, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, textStyle: StringeeWidget::EKProperty.StringeeWidget::LabelStyle, isSecure: Swift::Bool = false, leadingImage: UIKit::UIImage? = nil, bottomBorderColor: StringeeWidget::EKColor = .clear, accessibilityIdentifier: Swift::String? = nil)
+    public func tintColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor?
+    public func bottomBorderColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor?
+  }
+  public struct ButtonBarContent {
+    public var content: [StringeeWidget::EKProperty.StringeeWidget::ButtonContent]
+    public var separatorColor: StringeeWidget::EKColor
+    public var horizontalDistributionThreshold: Swift::Int
+    public var expandAnimatedly: Swift::Bool
+    public var buttonHeight: CoreFoundation::CGFloat
+    public var displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode
+    public init(with buttonContents: StringeeWidget::EKProperty.StringeeWidget::ButtonContent..., separatorColor: StringeeWidget::EKColor, horizontalDistributionThreshold: Swift::Int = 2, buttonHeight: CoreFoundation::CGFloat = 50, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, expandAnimatedly: Swift::Bool)
+    public init(with buttonContents: [StringeeWidget::EKProperty.StringeeWidget::ButtonContent], separatorColor: StringeeWidget::EKColor, horizontalDistributionThreshold: Swift::Int = 2, buttonHeight: CoreFoundation::CGFloat = 50, displayMode: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode = .inferred, expandAnimatedly: Swift::Bool)
+    public func separatorColor(for traitCollection: UIKit::UITraitCollection) -> UIKit::UIColor
+  }
+  public struct EKRatingItemContent {
+    public var title: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+    public var description: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+    public var unselectedImage: StringeeWidget::EKProperty.StringeeWidget::ImageContent
+    public var selectedImage: StringeeWidget::EKProperty.StringeeWidget::ImageContent
+    public var size: CoreFoundation::CGSize
+    public init(title: StringeeWidget::EKProperty.StringeeWidget::LabelContent, description: StringeeWidget::EKProperty.StringeeWidget::LabelContent, unselectedImage: StringeeWidget::EKProperty.StringeeWidget::ImageContent, selectedImage: StringeeWidget::EKProperty.StringeeWidget::ImageContent, size: CoreFoundation::CGSize = CGSize(width: 50, height: 50))
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency public class BarProgressView : UIKit::UIView, StringeeWidget::Progressive {
+  @_Concurrency::MainActor @preconcurrency public var progress: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var lineColor: UIKit::UIColor
+  @_Concurrency::MainActor @preconcurrency public var progressRemainingColor: UIKit::UIColor {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var progressColor: UIKit::UIColor {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency @objc convenience dynamic public init()
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation::CGSize {
+    @objc get
+  }
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func draw(_ rect: CoreFoundation::CGRect)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency::MainActor @preconcurrency final public class EKAlertMessageView : StringeeWidget::EKSimpleMessageView {
+  @_Concurrency::MainActor @preconcurrency public init(with message: StringeeWidget::EKAlertMessage)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @objc deinit
+}
+extension UIKit::UIView {
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func set(_ edge: StringeeWidget::QLAttribute, of value: CoreFoundation::CGFloat, relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1.0, priority: StringeeWidget::QLPriority = .required) -> UIKit::NSLayoutConstraint
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func set(_ edges: StringeeWidget::QLAttribute..., of value: CoreFoundation::CGFloat, relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1.0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLMultipleConstraints
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func set(_ edges: [StringeeWidget::QLAttribute], to value: CoreFoundation::CGFloat, relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1.0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLMultipleConstraints
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func layout(_ edge: StringeeWidget::QLAttribute? = nil, to otherEdge: StringeeWidget::QLAttribute, of view: StringeeWidget::QLView, relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1.0, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> UIKit::NSLayoutConstraint?
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func layout(_ edges: StringeeWidget::QLAttribute..., to view: StringeeWidget::QLView, relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1.0, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLMultipleConstraints
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func layoutToSuperview(_ edge: StringeeWidget::QLAttribute, relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> UIKit::NSLayoutConstraint?
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func layoutToSuperview(_ edges: StringeeWidget::QLAttribute..., relation: StringeeWidget::QLRelation = .equal, ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLMultipleConstraints
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func layoutToSuperview(axis: StringeeWidget::QLAxis, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLAxisConstraints?
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func sizeToSuperview(withRatio ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLSizeConstraints?
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func centerInSuperview(offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLCenterConstraints?
+  @discardableResult
+  @_Concurrency::MainActor @preconcurrency public func fillSuperview(withSizeRatio ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> StringeeWidget::QLFillConstraints?
+  @_Concurrency::MainActor @preconcurrency public var isValidForQuickLayout: Swift::Bool {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency public class BackgroundView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public var roundedCorners: StringeeWidget::RoundedCorners
+  @_Concurrency::MainActor @preconcurrency public var style: StringeeWidget::HUDBackgroundStyle {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var blurEffectStyle: UIKit::UIBlurEffect.UIKit::Style {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var color: UIKit::UIColor? {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation::CGRect)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation::CGSize {
+    @objc get
+  }
+  @objc deinit
+}
+extension StringeeWidget::EKAttributes {
+  public enum DisplayMode {
+    case inferred
+    case light
+    case dark
+    public static func == (a: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode, b: StringeeWidget::EKAttributes.StringeeWidget::DisplayMode) -> Swift::Bool
+    public func hash(into hasher: inout Swift::Hasher)
+    public var hashValue: Swift::Int {
+      get
+    }
+  }
+}
+extension StringeeWidget::EKAttributes {
+  public struct UserInteraction {
+    public typealias Action = () -> ()
+    public enum Default {
+      case absorbTouches
+      case delayExit(by: Foundation::TimeInterval)
+      case dismissEntry
+      case forward
+    }
+    public var defaultAction: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction.StringeeWidget::Default
+    public var customTapActions: [StringeeWidget::EKAttributes.StringeeWidget::UserInteraction.StringeeWidget::Action]
+    public init(defaultAction: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction.StringeeWidget::Default = .absorbTouches, customTapActions: [StringeeWidget::EKAttributes.StringeeWidget::UserInteraction.StringeeWidget::Action] = [])
+    public static var dismiss: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction {
+      get
+    }
+    public static var forward: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction {
+      get
+    }
+    public static var absorbTouches: StringeeWidget::EKAttributes.StringeeWidget::UserInteraction {
+      get
+    }
+    public static func delayExit(by delay: Foundation::TimeInterval) -> StringeeWidget::EKAttributes.StringeeWidget::UserInteraction
+  }
+}
+@objc @objcMembers public class StringeeWidgetServerAddress : ObjectiveC::NSObject {
+  @objc public init(host: Swift::String, port: Swift::Int)
+  @objc deinit
+}
+@objc @_Concurrency::MainActor @preconcurrency public class EKMessageContentView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public var titleContent: StringeeWidget::EKProperty.StringeeWidget::LabelContent! {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var subtitleContent: StringeeWidget::EKProperty.StringeeWidget::LabelContent! {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var titleAttributes: StringeeWidget::EKProperty.StringeeWidget::LabelStyle! {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var subtitleAttributes: StringeeWidget::EKProperty.StringeeWidget::LabelStyle! {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var title: Swift::String! {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var subtitle: Swift::String! {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var verticalMargins: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var horizontalMargins: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public var labelsOffset: CoreFoundation::CGFloat {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public init()
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+@objc @_Concurrency::MainActor @preconcurrency final public class EKRatingSymbolView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency final public var isSelected: Swift::Bool {
+    get
+    set
+  }
+  @_Concurrency::MainActor @preconcurrency public init(unselectedImage: StringeeWidget::EKProperty.StringeeWidget::ImageContent, selectedImage: StringeeWidget::EKProperty.StringeeWidget::ImageContent, selection: @escaping StringeeWidget::EKRatingMessage.StringeeWidget::Selection)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @objc deinit
+}
+public struct EKRatingMessage {
+  public typealias Selection = (Swift::Int) -> Swift::Void
+  public var initialTitle: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+  public var initialDescription: StringeeWidget::EKProperty.StringeeWidget::LabelContent
+  public var ratingItems: [StringeeWidget::EKProperty.StringeeWidget::EKRatingItemContent]
+  public var buttonBarContent: StringeeWidget::EKProperty.StringeeWidget::ButtonBarContent
+  public var selection: StringeeWidget::EKRatingMessage.StringeeWidget::Selection!
+  public var selectedIndex: Swift::Int? {
+    get
+    set
+  }
+  public init(initialTitle: StringeeWidget::EKProperty.StringeeWidget::LabelContent, initialDescription: StringeeWidget::EKProperty.StringeeWidget::LabelContent, ratingItems: [StringeeWidget::EKProperty.StringeeWidget::EKRatingItemContent], buttonBarContent: StringeeWidget::EKProperty.StringeeWidget::ButtonBarContent, selection: StringeeWidget::EKRatingMessage.StringeeWidget::Selection? = nil)
+}
+@objc @_Concurrency::MainActor @preconcurrency final public class EKPopUpMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency public init(with message: StringeeWidget::EKPopUpMessage)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+extension StringeeWidget::EKAttributes {
+  public typealias DisplayDuration = Foundation::TimeInterval
+}
+extension StringeeWidget::EKAttributes {
+  public enum WindowLevel {
+    case alerts
+    case statusBar
+    case normal
+    case custom(level: UIKit::UIWindow.UIKit::Level)
+    public var value: UIKit::UIWindow.UIKit::Level {
+      get
+    }
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency::MainActor @preconcurrency public class EKSimpleMessageView : UIKit::UIView {
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit::UITraitCollection?)
+  @objc deinit
+}
+extension Swift::Array where Element : UIKit::UIView {
+  @discardableResult
+  public func set(_ edge: StringeeWidget::QLAttribute, of value: CoreFoundation::CGFloat, priority: StringeeWidget::QLPriority = .required) -> [UIKit::NSLayoutConstraint]
+  @discardableResult
+  public func set(_ edges: StringeeWidget::QLAttribute..., of value: CoreFoundation::CGFloat, priority: StringeeWidget::QLPriority = .required) -> [StringeeWidget::QLMultipleConstraints]
+  @discardableResult
+  public func spread(_ axis: StringeeWidget::QLAxis, stretchEdgesToSuperview: Swift::Bool = false, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> [UIKit::NSLayoutConstraint]
+  @discardableResult
+  public func layoutToSuperview(axis: StringeeWidget::QLAxis, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> [StringeeWidget::QLAxisConstraints]
+  @discardableResult
+  public func layoutToSuperview(_ edge: StringeeWidget::QLAttribute, ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> [UIKit::NSLayoutConstraint]
+  @discardableResult
+  public func layout(_ firstEdge: StringeeWidget::QLAttribute? = nil, to anchorEdge: StringeeWidget::QLAttribute, of anchorView: StringeeWidget::QLView, ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> [UIKit::NSLayoutConstraint]
+  @discardableResult
+  public func layout(_ edges: StringeeWidget::QLAttribute..., to anchorView: StringeeWidget::QLView, ratio: CoreFoundation::CGFloat = 1, offset: CoreFoundation::CGFloat = 0, priority: StringeeWidget::QLPriority = .required) -> [StringeeWidget::QLMultipleConstraints]
+  public var isValidForQuickLayout: Swift::Bool {
+    get
+  }
+}
+extension StringeeWidget::SwiftyJSONError : Swift::Equatable {}
+extension StringeeWidget::SwiftyJSONError : Swift::Hashable {}
+extension StringeeWidget::SwiftyJSONError : Swift::RawRepresentable {}
+extension StringeeWidget::`Type` : Swift::Equatable {}
+extension StringeeWidget::`Type` : Swift::Hashable {}
+extension StringeeWidget::`Type` : Swift::RawRepresentable {}
+extension StringeeWidget::writingOptionsKeys : Swift::Equatable {}
+extension StringeeWidget::writingOptionsKeys : Swift::Hashable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Rotation.StringeeWidget::SupportedInterfaceOrientation : Swift::Equatable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::PositionConstraints.StringeeWidget::Rotation.StringeeWidget::SupportedInterfaceOrientation : Swift::Hashable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::Animation.StringeeWidget::Translate.StringeeWidget::AnchorPosition : Swift::Hashable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::StatusBar : Swift::Equatable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::StatusBar : Swift::Hashable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::QueueingHeuristic : Swift::Equatable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::Precedence.StringeeWidget::QueueingHeuristic : Swift::Hashable {}
+extension StringeeWidget::QLAxis : Swift::Equatable {}
+extension StringeeWidget::QLAxis : Swift::Hashable {}
+extension StringeeWidget::StringeeVideoResolution : Swift::Equatable {}
+extension StringeeWidget::StringeeVideoResolution : Swift::Hashable {}
+extension StringeeWidget::StringeeVideoResolution : Swift::RawRepresentable {}
+extension StringeeWidget::StringeeCameraFacing : Swift::Equatable {}
+extension StringeeWidget::StringeeCameraFacing : Swift::Hashable {}
+extension StringeeWidget::StringeeCameraFacing : Swift::RawRepresentable {}
+extension StringeeWidget::StringeeErrorDomain : Swift::Equatable {}
+extension StringeeWidget::StringeeErrorDomain : Swift::Hashable {}
+extension StringeeWidget::StringeeErrorDomain : Swift::RawRepresentable {}
+extension StringeeWidget::StringeeWidgetErrorCode : Swift::Equatable {}
+extension StringeeWidget::StringeeWidgetErrorCode : Swift::Hashable {}
+extension StringeeWidget::StringeeWidgetErrorCode : Swift::RawRepresentable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::NotificationHapticFeedback : Swift::Equatable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::NotificationHapticFeedback : Swift::Hashable {}
+extension StringeeWidget::HUDMode : Swift::Equatable {}
+extension StringeeWidget::HUDMode : Swift::Hashable {}
+extension StringeeWidget::HUDAnimation : Swift::Equatable {}
+extension StringeeWidget::HUDAnimation : Swift::Hashable {}
+extension StringeeWidget::HUDBackgroundStyle : Swift::Equatable {}
+extension StringeeWidget::HUDBackgroundStyle : Swift::Hashable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::Position : Swift::Equatable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::Position : Swift::Hashable {}
+extension StringeeWidget::EKAlertMessage.StringeeWidget::ImagePosition : Swift::Equatable {}
+extension StringeeWidget::EKAlertMessage.StringeeWidget::ImagePosition : Swift::Hashable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::DisplayMode : Swift::Equatable {}
+extension StringeeWidget::EKAttributes.StringeeWidget::DisplayMode : Swift::Hashable {}
